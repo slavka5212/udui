@@ -1,10 +1,16 @@
 package application.view;
 
+import java.lang.reflect.Method;
+
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+
+import aima.gui.applications.AimaDemoFrame;
+import aima.gui.applications.search.games.EightPuzzleApp;
 import application.MainApp;
 import application.SwingFx;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -34,14 +40,31 @@ public class VisualViewsController {
     private void initialize() {
     	System.out.println("visualPane " + visualPane);
     	System.out.println("leftPane " + leftPane);
-    	
-    	leftPane.setStyle("-fx-background: #0000FF;");
-    	Button fxbutton = new Button("Moj button");
         
         final SwingNode swingNode = new SwingNode();
         SwingFx.createSwingContent(swingNode);
+
+        AimaDemoFrame aima = new AimaDemoFrame(); 
+//        new AppStarter();
+        Class<EightPuzzleApp> appClass = EightPuzzleApp.class;
+        try {
+			Object instance = appClass.newInstance();
+			Method m = appClass.getMethod("constructApplicationFrame",
+					new Class[0]);
+			JFrame af = (JFrame) m.invoke(instance, (Object[]) null);
+			JComponent currPanel = (JComponent) af.getContentPane().getComponent(0);
+			af.getContentPane().remove(currPanel);
+			// set currPanel as swingNode
+			swingNode.setContent(currPanel);
+			// add swingNode to leftPane
+			leftPane.getChildren().add(swingNode);
+//			getContentPane().add(currPanel, BorderLayout.CENTER);
+//			validate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
         
-        rightPane.getChildren().add(fxbutton);
+//        leftPane.getChildren().add(swingNode);
     	
         // Initialize the person table with the two columns.
 //        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
