@@ -10,21 +10,21 @@
   <top>
     <MenuBar>
       <menus>
-        <Menu mnemonicParsing="false" text="Prehľadávania">
+        <Menu mnemonicParsing="false" text="Search">
           <items>
-            <MenuItem mnemonicParsing="false" text="Hľadanie cesty " />
-            <MenuItem mnemonicParsing="false" text="Vyfarbovanie mapy" />
+            <MenuItem mnemonicParsing="false" text="Map coloring" />
+            <MenuItem mnemonicParsing="false" text="Route finding" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Hry">
+        <Menu mnemonicParsing="false" text="Games">
           <items>
             <MenuItem mnemonicParsing="false" text="8 puzzle" />
-            <MenuItem mnemonicParsing="false" text="N dámy" />
+            <MenuItem mnemonicParsing="false" text="N queens" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Nastavenia">
+        <Menu mnemonicParsing="false" text="Settings">
           <items>
-            <MenuItem mnemonicParsing="false" text="O aplikácii" />
+            <MenuItem mnemonicParsing="false" text="About" />
           </items>
         </Menu>
       </menus>
