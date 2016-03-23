@@ -220,7 +220,7 @@ public class AgentAppFrame extends JFrame {
 		messageLogger = new MessageLoggerPanel();
 
 		centerPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-		centerPane.add(JSplitPane.RIGHT, messageLogger);
+//		centerPane.add(JSplitPane.RIGHT, messageLogger);
 		centerPane.setDividerSize(5);
 		centerPane.setResizeWeight(0.7);
 		contentPanel.add(centerPane, BorderLayout.CENTER);
