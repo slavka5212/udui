@@ -1,18 +1,27 @@
 package application.view;
 
 import application.MainApp;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 
 public class RootLayoutController {
+	// Reference to the main application.
+    private MainApp mainApp;
     @FXML
     private MenuBar mainMenu;
-
-    // Reference to the main application.
-    private MainApp mainApp;
+    private Menu searchMenu, gamesMenu, setMenu;
+//    private static final long serialVersionUID = 1L;
+//	JComponent currPanel;
+//	PrintStream outStream;
+	
 
     /**
      * The constructor.
@@ -27,38 +36,37 @@ public class RootLayoutController {
      */
     @FXML
     private void initialize() {
+    	assert getMainMenu() != null : "fx:id=\"mainMenu\" was not injected: check your FXML file 'RootLayout.fxml'.";
+    	
     	// initialize menu
     	Menu searchMenu = new Menu("Search");
     	searchMenu.getItems().add(new MenuItem("Map coloring"));
     	searchMenu.getItems().add(new MenuItem("Route finding"));
-    	mainMenu.getMenus().add(searchMenu);
+    	getMainMenu().getMenus().add(searchMenu);
     	
     	Menu gamesMenu = new Menu("Games");
-    	gamesMenu.getItems().add(new MenuItem("8 puzzle"));
-    	gamesMenu.getItems().add(new MenuItem("N queens"));
-    	mainMenu.getMenus().add(gamesMenu);
+
+//    	MenuItem item1 = new MenuItem("N queens");
+//    	item1.setOnAction(new AppStarter(NQueensApp.class));
+//    	gamesMenu.getItems().add(item1); 
+    	
+    	// add item to Menu
+//    	addItem(gamesMenu, EightPuzzleApp.class);
+//    	addItem(gamesMenu, NQueensApp.class);
+    	
+    	
+    	getMainMenu().getMenus().add(gamesMenu);
     	
     	Menu setMenu = new Menu("Settings");
     	setMenu.getItems().add(new MenuItem("Language"));
     	setMenu.getItems().add(new SeparatorMenuItem());
-    	setMenu.getItems().add(new MenuItem("About"));
-    	mainMenu.getMenus().add(setMenu);
     	
-        // Prepare left-most 'File' drop-down menu  
-//        Menu fileMenu = new Menu("File");
-//        fileMenu.getItems().add(new MenuItem("New"));
-//        fileMenu.getItems().add(new MenuItem("Open"));
-//        fileMenu.getItems().add(new MenuItem("Save"));
-//        fileMenu.getItems().add(new MenuItem("Save As"));
-//        fileMenu.getItems().add(new SeparatorMenuItem());
-//        fileMenu.getItems().add(new MenuItem("Exit"));
-        
-//        MenuItem item1 = new MenuItem("About");
-//        item1.setOnAction(new EventHandler<ActionEvent>() {
-//            public void handle(ActionEvent e) {
-//                System.out.println("About");
-//            }
-//        });
+    	MenuItem aboutItem = new MenuItem("About");
+    	aboutItem.setOnAction(handleAbout()); //.addEventHandler(ActionEvent.class, handleAbout());
+
+    	setMenu.getItems().add(aboutItem);
+    	getMainMenu().getMenus().add(setMenu);
+    
     }
 
     /**
@@ -68,8 +76,43 @@ public class RootLayoutController {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-
-        // Add observable list data to the table
-//        personTable.setItems(mainApp.getPersonData());
     }
+    
+    /**
+     * Opens an about dialog.
+     * @return 
+     */
+    @FXML
+    private EventHandler<ActionEvent> handleAbout() {
+		return new EventHandler<ActionEvent>() {
+          public void handle(ActionEvent e) {
+        	  Alert alert = new Alert(AlertType.INFORMATION);
+		        alert.setTitle("UDUI App");
+		        alert.setHeaderText("About");
+		        alert.setContentText("Author: Slávka Ivaničová\nWebsite: http://github.com/slavka5212/udui");
+		        alert.showAndWait();
+          }
+		};
+    }
+    
+    
+    /**
+	 * Adds a new agent application to the menu. The class is expected to be
+	 * part of a package and to provide a <code>constructApplicationFrame</code>
+	 * method.
+	 */
+	public void addItem(Menu subMenu, Class<?> appClass) {
+		MenuItem item = new MenuItem(appClass.getSimpleName()); // addAppToMenu(subMenu, appClass);
+		subMenu.getItems().add(item);
+		item.setOnAction(mainApp.new AppStarter(appClass));
+	}
+
+	public MenuBar getMainMenu() {
+		return mainMenu;
+	}
+
+	public void setMainMenu(MenuBar mainMenu) {
+		this.mainMenu = mainMenu;
+	}
+
 }
