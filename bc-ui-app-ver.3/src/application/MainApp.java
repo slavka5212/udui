@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.Dimension;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
@@ -11,12 +12,14 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -125,25 +128,26 @@ public class MainApp extends Application {
 		@Override
 		public void handle(ActionEvent event) {
 			try {
+				Pane leftP = viewsController.getLeftPane();
 				if (currPanel != null){
 //					Alert alert = new Alert(AlertType.INFORMATION);
 //			        alert.setTitle(appClass.getSimpleName());
 //			        alert.showAndWait();
-			        viewsController.getLeftPane().getChildren().remove(swingNode);
+					leftP.getChildren().remove(swingNode);
 				}
-				System.setOut(outStream);
+//				System.setOut(outStream);
 				Object instance = appClass.newInstance();
 				Method m = appClass.getMethod("constructApplicationFrame",
 						new Class[0]);
 				JFrame af = (JFrame) m.invoke(instance, (Object[]) null);
 				currPanel = (JComponent) af.getContentPane().getComponent(0);
 				af.getContentPane().remove(currPanel);
-				
+				currPanel.setMinimumSize(new Dimension((int)leftP.getWidth(), (int)leftP.getHeight()));
 				// set currPanel as swingNode
 				swingNode.setContent(currPanel);
 				// add swingNode to leftPane
-				System.out.println("swingNode " + swingNode);
-				viewsController.getLeftPane().getChildren().add(swingNode);
+				leftP.getChildren().add(swingNode);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

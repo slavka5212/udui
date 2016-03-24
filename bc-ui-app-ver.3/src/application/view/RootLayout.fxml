@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="500.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.view.RootLayoutController">
+<BorderPane minHeight="-1.0" minWidth="-1.0" prefHeight="615.0" prefWidth="830.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.view.RootLayoutController">
   <!-- TODO Add Nodes -->
   <top>
     <MenuBar fx:id="mainMenu" />
