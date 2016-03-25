@@ -17,11 +17,8 @@ public class RootLayoutController {
     private MainApp mainApp;
     @FXML
     private MenuBar mainMenu;
-    private Menu searchMenu, gamesMenu, setMenu;
+    private Menu setMenu;
 //    private static final long serialVersionUID = 1L;
-//	JComponent currPanel;
-//	PrintStream outStream;
-	
 
     /**
      * The constructor.
@@ -38,31 +35,13 @@ public class RootLayoutController {
     private void initialize() {
     	assert getMainMenu() != null : "fx:id=\"mainMenu\" was not injected: check your FXML file 'RootLayout.fxml'.";
     	
-    	// initialize menu
-    	Menu searchMenu = new Menu("Search");
-    	searchMenu.getItems().add(new MenuItem("Map coloring"));
-    	searchMenu.getItems().add(new MenuItem("Route finding"));
-    	getMainMenu().getMenus().add(searchMenu);
-    	
-    	Menu gamesMenu = new Menu("Games");
-
-//    	MenuItem item1 = new MenuItem("N queens");
-//    	item1.setOnAction(new AppStarter(NQueensApp.class));
-//    	gamesMenu.getItems().add(item1); 
-    	
-    	// add item to Menu
-//    	addItem(gamesMenu, EightPuzzleApp.class);
-//    	addItem(gamesMenu, NQueensApp.class);
-    	
-    	
-    	getMainMenu().getMenus().add(gamesMenu);
-    	
+    	// set the settings menu
     	Menu setMenu = new Menu("Settings");
     	setMenu.getItems().add(new MenuItem("Language"));
     	setMenu.getItems().add(new SeparatorMenuItem());
     	
     	MenuItem aboutItem = new MenuItem("About");
-    	aboutItem.setOnAction(handleAbout()); //.addEventHandler(ActionEvent.class, handleAbout());
+    	aboutItem.setOnAction(handleAbout());
 
     	setMenu.getItems().add(aboutItem);
     	getMainMenu().getMenus().add(setMenu);
@@ -102,7 +81,7 @@ public class RootLayoutController {
 	 * method.
 	 */
 	public void addItem(Menu subMenu, Class<?> appClass) {
-		MenuItem item = new MenuItem(appClass.getSimpleName()); // addAppToMenu(subMenu, appClass);
+		MenuItem item = new MenuItem(appClass.getSimpleName());
 		subMenu.getItems().add(item);
 		item.setOnAction(mainApp.new AppStarter(appClass));
 	}

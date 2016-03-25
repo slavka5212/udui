@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -23,7 +24,9 @@ import javafx.scene.layout.Pane;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import aima.gui.applications.search.csp.MapColoringApp;
 import aima.gui.applications.search.games.*;
+import aima.gui.applications.search.map.RouteFindingAgentApp;
 import application.view.RootLayoutController;
 import application.view.VisualViewsController;
 
@@ -42,17 +45,12 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("UIApp");
-
         
         initRootLayout();
 
         showVisualViews();
         
-    	// add items to Menu
-		Menu gamesMenu = new Menu("Games");
-		rootController.addItem(gamesMenu, EightPuzzleApp.class);
-		rootController.addItem(gamesMenu, NQueensApp.class);
-		rootController.getMainMenu().getMenus().add(gamesMenu);
+        initMenu();
     }
     /**
      * Initializes the root layout.
@@ -101,7 +99,23 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
-
+    
+    /**
+     * Initializes the menu bar into the root controller.
+     */
+    private void initMenu() {
+    	// add items to the search menu
+    	Menu searchMenu = new Menu("Search");
+    	rootController.addItem(searchMenu, MapColoringApp.class);
+		rootController.addItem(searchMenu, RouteFindingAgentApp.class);
+    	rootController.getMainMenu().getMenus().add(searchMenu);
+    	// add items to the games menu
+		Menu gamesMenu = new Menu("Games");
+		rootController.addItem(gamesMenu, EightPuzzleApp.class);
+		rootController.addItem(gamesMenu, NQueensApp.class);
+		rootController.getMainMenu().getMenus().add(gamesMenu);
+    }
+    
     /**
      * Returns the main stage.
      * @return
