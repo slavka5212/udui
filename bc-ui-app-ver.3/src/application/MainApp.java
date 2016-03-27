@@ -4,9 +4,13 @@ import java.awt.Dimension;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+
+import org.eclipse.osgi.util.NLS;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -39,17 +43,20 @@ public class MainApp extends Application {
     JComponent currPanel;
    	PrintStream outStream;
    	final SwingNode swingNode = new SwingNode();
-    
+    private ResourceBundle messages;
 
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("UIApp");
+        this.primaryStage.setTitle(Messages.MainApp_title);
         
+        // Set default language English
+        Messages.setMessages(Messages.skLocale);
+        messages = Messages.getMessages();
+        
+//        System.out.println(messages.getString("planet"));
         initRootLayout();
-
-        showVisualViews();
-        
+        showVisualViews(); 
         initMenu();
     }
     /**
@@ -59,7 +66,7 @@ public class MainApp extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml")); //$NON-NLS-1$
             rootLayout = (BorderPane) loader.load();     
             
             // Show the scene containing the root layout.
@@ -84,7 +91,7 @@ public class MainApp extends Application {
         try {
             // Load visual views.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/VisualViews.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/VisualViews.fxml")); //$NON-NLS-1$
 
             AnchorPane visualViews = (AnchorPane) loader.load();
 
@@ -104,12 +111,13 @@ public class MainApp extends Application {
      * Initializes the menu bar into the root controller.
      */
     private void initMenu() {
-    	// add items to the search menu
+    	// Add items to the search menu
     	Menu searchMenu = new Menu("Search");
+//        Menu searchMenu = new Menu(messages.getString("key_one"));
     	rootController.addItem(searchMenu, MapColoringApp.class);
 		rootController.addItem(searchMenu, RouteFindingAgentApp.class);
     	rootController.getMainMenu().getMenus().add(searchMenu);
-    	// add items to the games menu
+    	// Add items to the games menu
 		Menu gamesMenu = new Menu("Games");
 		rootController.addItem(gamesMenu, EightPuzzleApp.class);
 		rootController.addItem(gamesMenu, NQueensApp.class);
@@ -151,15 +159,15 @@ public class MainApp extends Application {
 				}
 //				System.setOut(outStream);
 				Object instance = appClass.newInstance();
-				Method m = appClass.getMethod("constructApplicationFrame",
+				Method m = appClass.getMethod("constructApplicationFrame", //$NON-NLS-1$
 						new Class[0]);
 				JFrame af = (JFrame) m.invoke(instance, (Object[]) null);
 				currPanel = (JComponent) af.getContentPane().getComponent(0);
 				af.getContentPane().remove(currPanel);
 				currPanel.setMinimumSize(new Dimension((int)leftP.getWidth(), (int)leftP.getHeight()));
-				// set currPanel as swingNode
+				// Set currPanel as swingNode
 				swingNode.setContent(currPanel);
-				// add swingNode to leftPane
+				// Add swingNode to leftPane
 				leftP.getChildren().add(swingNode);
 				
 			} catch (Exception e) {
