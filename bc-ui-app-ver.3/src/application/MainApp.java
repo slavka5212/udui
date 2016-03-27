@@ -43,18 +43,17 @@ public class MainApp extends Application {
 	JComponent currPanel;
 	PrintStream outStream;
 	final SwingNode swingNode = new SwingNode();
-	private ResourceBundle messages;
+	private static ResourceBundle messages;
 
 	@Override
 	public void start(Stage primaryStage) {
 		// Set default language English
-		Messages.setMessages(Messages.skLocale);
+		Messages.setMessages(Messages.enLocale);
 		messages = Messages.getMessages();
 
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle(messages.getString("MainApp_title"));
 
-		// System.out.println(messages.getString("planet"));
 		initRootLayout();
 		showVisualViews();
 		initMenu();
@@ -113,7 +112,6 @@ public class MainApp extends Application {
 	private void initMenu() {
 		// Add items to the search menu
 		Menu searchMenu = new Menu(messages.getString("menu_search"));
-		// Menu searchMenu = new Menu(messages.getString("key_one"));
 		rootController.addItem(searchMenu, MapColoringApp.class);
 		rootController.addItem(searchMenu, RouteFindingAgentApp.class);
 		rootController.getMainMenu().getMenus().add(searchMenu);

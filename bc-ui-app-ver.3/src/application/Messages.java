@@ -8,12 +8,10 @@ public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "application.translation.messages"; //$NON-NLS-1$
   
 	private static ResourceBundle messages;
-	static final Locale enLocale = new Locale("en","US"); //$NON-NLS-1$ //$NON-NLS-2$
-	static final Locale skLocale = new Locale("sk","SK"); //$NON-NLS-1$ //$NON-NLS-2$
+	public static final Locale enLocale = new Locale("en","US"); //$NON-NLS-1$ //$NON-NLS-2$s
+	public static final Locale skLocale = new Locale("sk","SK"); //$NON-NLS-1$ //$NON-NLS-2$
   
 	static {
-		// initialize resource bundle
-//		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}
 	  
 	private Messages() {
