@@ -121,6 +121,8 @@ public class RootLayoutController {
 		return new EventHandler<ActionEvent>() {
           public void handle(ActionEvent e) {
         	  Messages.setMessages(newLanguage);
+        	  mainApp.initRootLayout();
+        	  mainApp.showVisualViews();
           }
 		};
     }
@@ -131,7 +133,7 @@ public class RootLayoutController {
 	 * method.
 	 */
 	public void addItem(Menu subMenu, Class<?> appClass) {
-		MenuItem item = new MenuItem(appClass.getSimpleName());
+		MenuItem item = new MenuItem(Messages.getMessages().getString("app_"+appClass.getSimpleName()));
 		subMenu.getItems().add(item);
 		item.setOnAction(mainApp.new AppStarter(appClass));
 	}

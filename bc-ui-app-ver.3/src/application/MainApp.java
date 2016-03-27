@@ -43,20 +43,17 @@ public class MainApp extends Application {
 	JComponent currPanel;
 	PrintStream outStream;
 	final SwingNode swingNode = new SwingNode();
-	private static ResourceBundle messages;
 
 	@Override
 	public void start(Stage primaryStage) {
 		// Set default language English
 		Messages.setMessages(Messages.enLocale);
-		messages = Messages.getMessages();
 
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle(messages.getString("MainApp_title"));
+		this.primaryStage.setTitle(Messages.getMessages().getString("MainApp_title"));
 
 		initRootLayout();
 		showVisualViews();
-		initMenu();
 	}
 
 	/**
@@ -77,7 +74,10 @@ public class MainApp extends Application {
 			rootController = loader.getController();
 			rootController.setMainApp(this);
 
+			initMenu();
+			
 			primaryStage.show();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -111,12 +111,12 @@ public class MainApp extends Application {
 	 */
 	private void initMenu() {
 		// Add items to the search menu
-		Menu searchMenu = new Menu(messages.getString("menu_search"));
+		Menu searchMenu = new Menu(Messages.getMessages().getString("menu_search"));
 		rootController.addItem(searchMenu, MapColoringApp.class);
 		rootController.addItem(searchMenu, RouteFindingAgentApp.class);
 		rootController.getMainMenu().getMenus().add(searchMenu);
 		// Add items to the games menu
-		Menu gamesMenu = new Menu(messages.getString("menu_games"));
+		Menu gamesMenu = new Menu(Messages.getMessages().getString("menu_games"));
 		rootController.addItem(gamesMenu, EightPuzzleApp.class);
 		rootController.addItem(gamesMenu, NQueensApp.class);
 		rootController.getMainMenu().getMenus().add(gamesMenu);
