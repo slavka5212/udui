@@ -41,6 +41,7 @@ import aima.gui.framework.AgentAppFrame;
 import aima.gui.framework.MessageLogger;
 import aima.gui.framework.SimpleAgentApp;
 import aima.gui.framework.SimulationThread;
+import application.Messages;
 
 /**
  * Graphical 8-puzzle game application. It demonstrates the performance
@@ -55,15 +56,19 @@ public class EightPuzzleApp extends SimpleAgentApp {
 	protected static List<String> SEARCH_NAMES = new ArrayList<String>();
 	/** List of supported search algorithms. */
 	protected static List<Search> SEARCH_ALGOS = new ArrayList<Search>();
-
+	
 	/** Adds a new item to the list of supported search algorithms. */
 	public static void addSearchAlgorithm(String name, Search algo) {
 		SEARCH_NAMES.add(name);
 		SEARCH_ALGOS.add(algo);
 	}
+	public static EightPuzzleApp thisApp;
 
-	static {
-		addSearchAlgorithm("Breadth First Search (Graph Search)",
+	static void loadAlgorithms() {
+		SEARCH_NAMES = new ArrayList<String>();
+		SEARCH_ALGOS = new ArrayList<Search>();
+		addSearchAlgorithm(Messages.getMessages().getString("alg_BreadthFirstSearch")+ " (" + Messages.getMessages().getString("alg_GraphSearch")+ ")", 
+				//"Breadth First Search (Graph Search)",
 				new BreadthFirstSearch(new GraphSearch()));
 		addSearchAlgorithm("Depth Limited Search (9)",
 				new DepthLimitedSearch(9));
@@ -93,6 +98,8 @@ public class EightPuzzleApp extends SimpleAgentApp {
 	/** Returns a <code>EightPuzzleFrame</code> instance. */
 	@Override
 	public AgentAppFrame createFrame() {
+		// load the app. algorithms with the proper translations
+		loadAlgorithms();
 		return new EightPuzzleFrame();
 	}
 
@@ -124,10 +131,13 @@ public class EightPuzzleApp extends SimpleAgentApp {
 		public static String SEARCH_SEL = "SearchSelection";
 
 		public EightPuzzleFrame() {
+			//reloadClass(new EightPuzzleApp()); //.startApplication();
+			//thisApp = new EightPuzzleApp(); //.main();
 			setTitle("Eight Puzzle Application");
 			setSelectors(new String[] { ENV_SEL, SEARCH_SEL }, new String[] {
 					"Select Environment", "Select Search" });
-			setSelectorItems(ENV_SEL, new String[] { "Three Moves", "Medium",
+			setSelectorItems(ENV_SEL, new String[] { Messages.getMessages().getString("env_ThreeMoves"), // "Tree Moves"
+					"Medium",
 					"Extreme", "Random" }, 0);
 			setSelectorItems(SEARCH_SEL, (String[]) SEARCH_NAMES
 					.toArray(new String[] {}), 0);
