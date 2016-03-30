@@ -104,7 +104,7 @@ public class RootLayoutController {
 		        formatter.applyPattern(messages.getString("about_author"));
 		        String output = formatter.format(messageArguments);*/
 		         // http://github.com/slavka5212/udui
-		        String about_info = messages.getString("about_author") + " Slávka Ivaničová \n" + messages.getString("about_website") + " http://github.com/slavka5212/udui";
+		        String about_info = messages.getString("about_author") + " " + messages.getString("MainApp_author") + "\n" + messages.getString("about_website") + " " + messages.getString("MainApp_website");
 		        alert.setContentText(about_info);
 		        alert.showAndWait();
           }
