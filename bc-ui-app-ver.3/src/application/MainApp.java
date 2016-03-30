@@ -42,12 +42,15 @@ public class MainApp extends Application {
 
 	JComponent currPanel;
 	PrintStream outStream;
-	final SwingNode swingNode = new SwingNode();
+	private SwingNode swingNode = new SwingNode();
+	public Locale currLanguage = Messages.enLocale; // Set default language English
 
 	@Override
 	public void start(Stage primaryStage) {
-		// Set default language English
-		Messages.setMessages(Messages.enLocale);
+		
+		Messages.setMessages(currLanguage);
+		swingNode = new SwingNode();
+		//currPanel = null;
 
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle(Messages.getMessages().getString("MainApp_title"));

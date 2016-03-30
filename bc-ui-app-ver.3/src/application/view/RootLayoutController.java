@@ -120,9 +120,12 @@ public class RootLayoutController {
     private EventHandler<ActionEvent> handleLanguage(Locale newLanguage) {
 		return new EventHandler<ActionEvent>() {
           public void handle(ActionEvent e) {
-        	  Messages.setMessages(newLanguage);
-        	  mainApp.initRootLayout();
-        	  mainApp.showVisualViews();
+        	  //Messages.setMessages(newLanguage);
+        	  //mainApp.stop();
+        	  mainApp.currLanguage = newLanguage; 
+        	  mainApp.start(mainApp.getPrimaryStage());
+        	  //mainApp.initRootLayout();
+        	  //mainApp.showVisualViews();
           }
 		};
     }
