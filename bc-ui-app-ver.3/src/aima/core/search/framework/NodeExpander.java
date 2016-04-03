@@ -2,6 +2,7 @@ package aima.core.search.framework;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Math;
 
 import aima.core.agent.Action;
 
@@ -12,6 +13,8 @@ import aima.core.agent.Action;
 public class NodeExpander {
 	public static final String METRIC_NODES_EXPANDED = "nodesExpanded";
 
+	public static final String EFFECTIVE_BRANCHING_FACTOR = "effectiveBranchingFactor";
+	
 	protected Metrics metrics;
 
 	public NodeExpander() {
@@ -23,6 +26,7 @@ public class NodeExpander {
 	 */
 	public void clearInstrumentation() {
 		metrics.set(METRIC_NODES_EXPANDED, 0);
+		metrics.set(EFFECTIVE_BRANCHING_FACTOR, 0);
 	}
 
 	/**
@@ -34,6 +38,14 @@ public class NodeExpander {
 		return metrics.getInt(METRIC_NODES_EXPANDED);
 	}
 
+	public double getEffectiveBranchingFactor() {
+		return metrics.getDouble(EFFECTIVE_BRANCHING_FACTOR);
+	}
+
+	public void setEffectiveBranchingFactor(double d) {
+		metrics.set(EFFECTIVE_BRANCHING_FACTOR, d);
+	}
+	
 	/**
 	 * Returns all the metrics of the node expander.
 	 * 
@@ -71,8 +83,9 @@ public class NodeExpander {
 			childNodes.add(new Node(successorState, node, action, stepCost));
 		}
 		metrics.set(METRIC_NODES_EXPANDED,
-				metrics.getInt(METRIC_NODES_EXPANDED) + 1);
-
+				metrics.getInt(METRIC_NODES_EXPANDED) + 1);		
+		
+		setEffectiveBranchingFactor(Math.pow(getNodesExpanded(), ((double)1/(double)node.getPathFromRoot().size())));
 		return childNodes;
 	}
 }

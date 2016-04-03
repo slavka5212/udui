@@ -3,7 +3,10 @@ package aima.core.agent.impl;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.MissingResourceException;
 import java.util.Set;
+
+import application.Messages;
 
 /**
  * @author Ravi Mohan
@@ -45,8 +48,14 @@ public abstract class ObjectWithDynamicAttributes {
 			}
 
 			sb.append(key);
-			sb.append("==");
+			sb.append(" = ");
 			sb.append(attributes.get(key));
+/*			try {
+				sb.append(Messages.getMessages().getString((String) attributes.get(key)));
+			} catch (MissingResourceException mre) {
+				
+			}*/
+			
 		}
 		sb.append("]");
 

@@ -103,7 +103,7 @@ public class MainApp extends Application {
 			// Give the controller access to the main app.
 			viewsController = loader.getController();
 			viewsController.setMainApp(this);
-
+			viewsController.getLeftPane().getChildren().add(swingNode);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -153,12 +153,12 @@ public class MainApp extends Application {
 		public void handle(ActionEvent event) {
 			try {
 				Pane leftP = viewsController.getLeftPane();
-				if (currPanel != null) {
+				//if (currPanel != null) {
 					// Alert alert = new Alert(AlertType.INFORMATION);
 					// alert.setTitle(appClass.getSimpleName());
 					// alert.showAndWait();
 					leftP.getChildren().remove(swingNode);
-				}
+				//}
 				// System.setOut(outStream);
 				Object instance = appClass.newInstance();
 				Method m = appClass.getMethod("constructApplicationFrame", //$NON-NLS-1$
