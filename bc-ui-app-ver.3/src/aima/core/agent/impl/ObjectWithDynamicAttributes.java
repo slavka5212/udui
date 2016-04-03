@@ -47,15 +47,20 @@ public abstract class ObjectWithDynamicAttributes {
 				sb.append(", ");
 			}
 
-			sb.append(key);
-			sb.append(" = ");
-			sb.append(attributes.get(key));
-/*			try {
-				sb.append(Messages.getMessages().getString((String) attributes.get(key)));
+			String keyTraslation = key.toString();
+			try {
+				keyTraslation = Messages.getMessages().getString(keyTraslation);
 			} catch (MissingResourceException mre) {
-				
-			}*/
-			
+			}
+			sb.append(keyTraslation);
+			sb.append(" = ");
+			String traslation = attributes.get(key).toString();
+			try {
+				traslation = Messages.getMessages().getString(traslation);
+			} catch (MissingResourceException mre) {
+			}
+			sb.append(traslation);
+
 		}
 		sb.append("]");
 

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.Random;
 
@@ -369,7 +370,13 @@ public class EightPuzzleApp extends SimpleAgentApp {
 			while (keys.hasNext()) {
 				String key = (String) keys.next();
 				String property = properties.getProperty(key);
-				result.append("\n" + key + " : " + property);
+				String traslationOfKey;
+				try {
+					traslationOfKey = Messages.getMessages().getString("metric_"+key);
+				} catch (MissingResourceException mre) {
+					traslationOfKey = key;
+				} 
+				result.append("\n" + traslationOfKey + ": " + property);
 			}
 			return result.toString();
 		}
