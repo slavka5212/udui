@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -55,18 +56,17 @@ public class EightPuzzleApp extends SimpleAgentApp {
 	/** List of supported search algorithm names. */
 	protected static List<String> SEARCH_NAMES = new ArrayList<String>();
 	/** List of supported search algorithms. */
-	protected static List<Search> SEARCH_ALGOS = new ArrayList<Search>();
-	
-	/** Adds a new item to the list of supported search algorithms. */
-	public static void addSearchAlgorithm(String name, Search algo) {
-		SEARCH_NAMES.add(name);
-		SEARCH_ALGOS.add(algo);
-	}
-	public static EightPuzzleApp thisApp;
-
-	static void loadAlgorithms() {
-		SEARCH_NAMES = new ArrayList<String>();
-		SEARCH_ALGOS = new ArrayList<Search>();
+	protected static List<Search> SEARCH_ALGOS = new ArrayList<Search>(Arrays.asList(
+			new BreadthFirstSearch(new GraphSearch()),
+			new DepthLimitedSearch(9),
+			new IterativeDeepeningSearch(),
+			new GreedyBestFirstSearch(new GraphSearch(), new MisplacedTilleHeuristicFunction()),
+			new GreedyBestFirstSearch(new GraphSearch(), new ManhattanHeuristicFunction()),
+			new AStarSearch(new GraphSearch(), new MisplacedTilleHeuristicFunction()),
+			new AStarSearch(new GraphSearch(), new ManhattanHeuristicFunction()),
+			new SimulatedAnnealingSearch(new ManhattanHeuristicFunction())
+	));
+/*	static {
 		addSearchAlgorithm(Messages.getMessages().getString("alg_BreadthFirstSearch")+ " (" + Messages.getMessages().getString("alg_GraphSearch")+ ")", 
 				//"Breadth First Search (Graph Search)",
 				new BreadthFirstSearch(new GraphSearch()));
@@ -88,6 +88,18 @@ public class EightPuzzleApp extends SimpleAgentApp {
 						new ManhattanHeuristicFunction()));
 		addSearchAlgorithm("Simulated Annealing Search",
 				new SimulatedAnnealingSearch(new ManhattanHeuristicFunction()));
+	}*/
+	static void loadNewSearchNames() {
+		SEARCH_NAMES = new ArrayList<String>(Arrays.asList(
+				Messages.getMessages().getString("alg_BreadthFirstSearch")+ " (" + Messages.getMessages().getString("alg_GraphSearch") + ")", 
+				Messages.getMessages().getString("alg_DepthLimitedSearch")+ " (9)",
+				Messages.getMessages().getString("alg_IterativeDeepeningSearch"),
+				Messages.getMessages().getString("alg_GreedyBestFirstSearch")+ " (" + Messages.getMessages().getString("alg_MisplacedTileHeuristic") + ")",
+				Messages.getMessages().getString("alg_GreedyBestFirstSearch")+ " (" + Messages.getMessages().getString("alg_ManhattanHeuristic") + ")",
+				Messages.getMessages().getString("alg_AStarSearch")+ " (" + Messages.getMessages().getString("alg_MisplacedTileHeuristic") + ")",
+				Messages.getMessages().getString("alg_AStarSearch")+ " (" + Messages.getMessages().getString("alg_ManhattanHeuristic") + ")",
+				Messages.getMessages().getString("alg_SimulatedAnnealingSearch")
+		));
 	}
 
 	/** Returns an <code>EightPuzzleView</code> instance. */
@@ -99,7 +111,7 @@ public class EightPuzzleApp extends SimpleAgentApp {
 	@Override
 	public AgentAppFrame createFrame() {
 		// load the app. algorithms with the proper translations
-		loadAlgorithms();
+		loadNewSearchNames();
 		return new EightPuzzleFrame();
 	}
 
@@ -131,14 +143,15 @@ public class EightPuzzleApp extends SimpleAgentApp {
 		public static String SEARCH_SEL = "SearchSelection";
 
 		public EightPuzzleFrame() {
-			//reloadClass(new EightPuzzleApp()); //.startApplication();
-			//thisApp = new EightPuzzleApp(); //.main();
 			setTitle("Eight Puzzle Application");
 			setSelectors(new String[] { ENV_SEL, SEARCH_SEL }, new String[] {
 					"Select Environment", "Select Search" });
-			setSelectorItems(ENV_SEL, new String[] { Messages.getMessages().getString("env_ThreeMoves"), // "Tree Moves"
-					"Medium",
-					"Extreme", "Random" }, 0);
+			setSelectorItems(ENV_SEL, 
+					new String[] { Messages.getMessages().getString("env_ThreeMoves"),
+							Messages.getMessages().getString("env_Medium"), 
+							Messages.getMessages().getString("env_Extreme"), 
+							Messages.getMessages().getString("env_Random") 
+					}, 0);
 			setSelectorItems(SEARCH_SEL, (String[]) SEARCH_NAMES
 					.toArray(new String[] {}), 0);
 			setEnvView(new EightPuzzleView());

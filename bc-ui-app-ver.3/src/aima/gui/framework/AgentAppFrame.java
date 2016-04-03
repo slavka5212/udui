@@ -16,6 +16,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 
+import application.Messages;
+
 /**
  * <p>
  * Universal frame for building graphical agent applications. It provides
@@ -195,23 +197,23 @@ public class AgentAppFrame extends JFrame {
 		selectors = new SelectorContainer();
 		toolbar.add(Box.createHorizontalGlue());
 
-		clearButton = new JButton("Clear");
+		clearButton = new JButton(Messages.getMessages().getString("clear"));
 		clearButton.setToolTipText("Clear Views");
 		clearButton.addActionListener(actionListener);
 		toolbar.add(clearButton);
-		prepareButton = new JButton("Prepare");
+		prepareButton = new JButton(Messages.getMessages().getString("prepare"));
 		prepareButton.setToolTipText("Prepare Simulation");
 		prepareButton.addActionListener(actionListener);
 		toolbar.add(prepareButton);
-		runButton = new JButton("Run");
+		runButton = new JButton(Messages.getMessages().getString("run"));
 		runButton.setToolTipText("Run Simulation");
 		runButton.addActionListener(actionListener);
 		toolbar.add(runButton);
-		stepButton = new JButton("Step");
+		stepButton = new JButton(Messages.getMessages().getString("step"));
 		stepButton.setToolTipText("Execute Simulation Step");
 		stepButton.addActionListener(actionListener);
 		toolbar.add(stepButton);
-		pauseButton = new JToggleButton("Pause");
+		pauseButton = new JToggleButton(Messages.getMessages().getString("pause"));
 		pauseButton.setToolTipText("Pause Simulation");
 		pauseButton.addActionListener(actionListener);
 		toolbar.add(pauseButton);
