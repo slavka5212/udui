@@ -10,6 +10,7 @@ import aima.core.environment.map.Scenario;
 import aima.gui.framework.AgentAppController;
 import aima.gui.framework.MessageLogger;
 import aima.gui.framework.SimulationThread;
+import application.Messages;
 
 /**
  * Provides a useful base class for agent application controller implementations
@@ -108,24 +109,24 @@ public abstract class AbstractMapAgentController extends AgentAppController {
 	/** Updates the status of the frame. */
 	public void update(SimulationThread simulationThread) {
 		if (simulationThread.isCanceled()) {
-			frame.setStatus("Task canceled.");
+			frame.setStatus(Messages.getMessages().getString("task_canceled"));
 			isPrepared = false;
 		} else if (frame.simulationPaused()){
-			frame.setStatus("Task paused.");
+			frame.setStatus(Messages.getMessages().getString("task_paused"));
 		} else {
 			StringBuffer statusMsg = new StringBuffer();
-			statusMsg.append("Task completed");
+			statusMsg.append(Messages.getMessages().getString("task_completed"));
 			List<Agent> agents = scenario.getEnv().getAgents();
 			if (agents.size() == 1) {
 				Double travelDistance = scenario.getEnv().getAgentTravelDistance(
 						agents.get(0));
 				if (travelDistance != null) {
 					DecimalFormat f = new DecimalFormat("#0.0");
-					statusMsg.append("; travel distance: "
+					statusMsg.append("; " + Messages.getMessages().getString("travel_distance") + ": "
 							+ f.format(travelDistance));
 				}
 			}
-			statusMsg.append(".");
+			//statusMsg.append(".");
 			frame.setStatus(statusMsg.toString());
 		}
 	}

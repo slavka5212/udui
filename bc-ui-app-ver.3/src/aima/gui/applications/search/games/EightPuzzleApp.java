@@ -354,11 +354,11 @@ public class EightPuzzleApp extends SimpleAgentApp {
 		/** Updates the status of the frame after simulation has finished. */
 		public void update(SimulationThread simulationThread) {
 			if (simulationThread.isCanceled()) {
-				frame.setStatus("Task canceled.");
+				frame.setStatus(Messages.getMessages().getString("task_canceled"));
 			} else if (frame.simulationPaused()) {
-				frame.setStatus("Task paused.");
+				frame.setStatus(Messages.getMessages().getString("task_paused"));
 			} else {
-				frame.setStatus("Task completed.");
+				frame.setStatus(Messages.getMessages().getString("task_completed"));
 			}
 		}
 

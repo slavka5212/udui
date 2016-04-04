@@ -45,6 +45,7 @@ import aima.gui.framework.AgentAppFrame;
 import aima.gui.framework.MessageLogger;
 import aima.gui.framework.SimpleAgentApp;
 import aima.gui.framework.SimulationThread;
+import application.Messages;
 
 /**
  * Graphical n-queens game application. It demonstrates the performance of
@@ -345,11 +346,11 @@ public class NQueensApp extends SimpleAgentApp {
 		/** Updates the status of the frame after simulation has finished. */
 		public void update(SimulationThread simulationThread) {
 			if (simulationThread.isCanceled()) {
-				frame.setStatus("Task canceled.");
+				frame.setStatus(Messages.getMessages().getString("task_canceled"));
 			} else if (frame.simulationPaused()) {
-				frame.setStatus("Task paused.");
+				frame.setStatus(Messages.getMessages().getString("task_paused"));
 			} else {
-				frame.setStatus("Task completed.");
+				frame.setStatus(Messages.getMessages().getString("task_completed"));
 			}
 		}
 
