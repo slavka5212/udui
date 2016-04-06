@@ -67,29 +67,7 @@ public class EightPuzzleApp extends SimpleAgentApp {
 			new AStarSearch(new GraphSearch(), new ManhattanHeuristicFunction()),
 			new SimulatedAnnealingSearch(new ManhattanHeuristicFunction())
 	));
-/*	static {
-		addSearchAlgorithm(Messages.getMessages().getString("alg_BreadthFirstSearch")+ " (" + Messages.getMessages().getString("alg_GraphSearch")+ ")", 
-				//"Breadth First Search (Graph Search)",
-				new BreadthFirstSearch(new GraphSearch()));
-		addSearchAlgorithm("Depth Limited Search (9)",
-				new DepthLimitedSearch(9));
-		addSearchAlgorithm("Iterative Deepening Search",
-				new IterativeDeepeningSearch());
-		addSearchAlgorithm("Greedy Best First Search (MisplacedTileHeursitic)",
-				new GreedyBestFirstSearch(new GraphSearch(),
-						new MisplacedTilleHeuristicFunction()));
-		addSearchAlgorithm("Greedy Best First Search (ManhattanHeursitic)",
-				new GreedyBestFirstSearch(new GraphSearch(),
-						new ManhattanHeuristicFunction()));
-		addSearchAlgorithm("AStar Search (MisplacedTileHeursitic)",
-				new AStarSearch(new GraphSearch(),
-						new MisplacedTilleHeuristicFunction()));
-		addSearchAlgorithm("AStar Search (ManhattanHeursitic)",
-				new AStarSearch(new GraphSearch(),
-						new ManhattanHeuristicFunction()));
-		addSearchAlgorithm("Simulated Annealing Search",
-				new SimulatedAnnealingSearch(new ManhattanHeuristicFunction()));
-	}*/
+
 	static void loadNewSearchNames() {
 		SEARCH_NAMES = new ArrayList<String>(Arrays.asList(
 				Messages.getMessages().getString("alg_BreadthFirstSearch")+ " (" + Messages.getMessages().getString("alg_GraphSearch") + ")", 

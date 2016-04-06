@@ -7,6 +7,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -60,33 +61,28 @@ public class NQueensApp extends SimpleAgentApp {
 	/** List of supported search algorithm names. */
 	protected static List<String> SEARCH_NAMES = new ArrayList<String>();
 	/** List of supported search algorithms. */
-	protected static List<Search> SEARCH_ALGOS = new ArrayList<Search>();
+	protected static List<Search> SEARCH_ALGOS = new ArrayList<Search>(Arrays.asList(
+			new DepthFirstSearch(new GraphSearch()),
+			new DepthLimitedSearch(8),
+			new BreadthFirstSearch(new TreeSearch()),
+			new BreadthFirstSearch(new GraphSearch()),
+			new IterativeDeepeningSearch(),
+			new AStarSearch(new GraphSearch(), new AttackingPairsHeuristic()),
+			new HillClimbingSearch(new AttackingPairsHeuristic()),
+			new SimulatedAnnealingSearch(new AttackingPairsHeuristic(), new Scheduler(20, 0.045, 1000))
+	));
 
-	/** Adds a new item to the list of supported search algorithms. */
-	public static void addSearchAlgorithm(String name, Search algo) {
-		SEARCH_NAMES.add(name);
-		SEARCH_ALGOS.add(algo);
-	}
-
-	static {
-		addSearchAlgorithm("Depth First Search (Graph Search)",
-				new DepthFirstSearch(new GraphSearch()));
-		addSearchAlgorithm("Breadth First Search (Tree Search)",
-				new BreadthFirstSearch(new TreeSearch()));
-		addSearchAlgorithm("Breadth First Search (Graph Search)",
-				new BreadthFirstSearch(new GraphSearch()));
-		addSearchAlgorithm("Depth Limited Search (8)",
-				new DepthLimitedSearch(8));
-		addSearchAlgorithm("Iterative Deepening Search",
-				new IterativeDeepeningSearch());
-		addSearchAlgorithm("A* search (attacking pair heuristic)",
-				new AStarSearch(new GraphSearch(),
-						new AttackingPairsHeuristic()));
-		addSearchAlgorithm("Hill Climbing Search", new HillClimbingSearch(
-				new AttackingPairsHeuristic()));
-		addSearchAlgorithm("Simulated Annealing Search",
-				new SimulatedAnnealingSearch(new AttackingPairsHeuristic(),
-						new Scheduler(20, 0.045, 1000)));
+	static void loadNewSearchNames() {
+		SEARCH_NAMES = new ArrayList<String>(Arrays.asList(
+				Messages.getMessages().getString("alg_DepthLimitedSearch")+ " (" + Messages.getMessages().getString("alg_GraphSearch") + ")",
+				Messages.getMessages().getString("alg_DepthLimitedSearch")+ " (8)",
+				Messages.getMessages().getString("alg_BreadthFirstSearch")+ " (" + Messages.getMessages().getString("alg_TreeSearch") + ")", 
+				Messages.getMessages().getString("alg_BreadthFirstSearch")+ " (" + Messages.getMessages().getString("alg_GraphSearch") + ")", 
+				Messages.getMessages().getString("alg_IterativeDeepeningSearch"),
+				Messages.getMessages().getString("alg_AStarSearch")+ " (" + Messages.getMessages().getString("alg_AttackingPairsHeuristic") + ")",
+				Messages.getMessages().getString("alg_HillClimbingSearch")+ " (" + Messages.getMessages().getString("alg_AttackingPairsHeuristic") + ")",
+				Messages.getMessages().getString("alg_SimulatedAnnealingSearch")
+		));
 	}
 
 	/** Returns a <code>NQueensView</code> instance. */
@@ -97,6 +93,7 @@ public class NQueensApp extends SimpleAgentApp {
 	/** Returns a <code>NQueensFrame</code> instance. */
 	@Override
 	public AgentAppFrame createFrame() {
+		loadNewSearchNames();
 		return new NQueensFrame();
 	}
 
@@ -133,10 +130,12 @@ public class NQueensApp extends SimpleAgentApp {
 			setSelectors(new String[] { ENV_SEL, PROBLEM_SEL, SEARCH_SEL },
 					new String[] { "Select Environment",
 							"Select Problem Formulation", "Select Search" });
-			setSelectorItems(ENV_SEL, new String[] { "4 Queens", "8 Queens",
-					"16 Queens", "32 Queens" }, 1);
-			setSelectorItems(PROBLEM_SEL, new String[] { "Incremental",
-					"Complete-State" }, 0);
+			setSelectorItems(ENV_SEL, new String[] { Messages.getMessages().getString("env_4Queens"),
+					"8 "+Messages.getMessages().getString("env_Queens"),
+					"16 "+Messages.getMessages().getString("env_Queens"), 
+					"32 "+Messages.getMessages().getString("env_Queens") }, 1);
+			setSelectorItems(PROBLEM_SEL, new String[] { Messages.getMessages().getString("env_Incremental"),
+					Messages.getMessages().getString("env_Complete-State") }, 0);
 			setSelectorItems(SEARCH_SEL, (String[]) SEARCH_NAMES
 					.toArray(new String[] {}), 0);
 			setEnvView(new NQueensView());
