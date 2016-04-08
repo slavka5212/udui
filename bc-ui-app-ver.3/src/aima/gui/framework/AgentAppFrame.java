@@ -198,23 +198,23 @@ public class AgentAppFrame extends JFrame {
 		toolbar.add(Box.createHorizontalGlue());
 
 		clearButton = new JButton(Messages.getMessages().getString("clear"));
-		clearButton.setToolTipText("Clear Views");
+		clearButton.setToolTipText(Messages.getMessages().getString("clear_views"));
 		clearButton.addActionListener(actionListener);
 		toolbar.add(clearButton);
 		prepareButton = new JButton(Messages.getMessages().getString("prepare"));
-		prepareButton.setToolTipText("Prepare Simulation");
+		prepareButton.setToolTipText(Messages.getMessages().getString("prepare_simulation"));
 		prepareButton.addActionListener(actionListener);
 		toolbar.add(prepareButton);
 		runButton = new JButton(Messages.getMessages().getString("run"));
-		runButton.setToolTipText("Run Simulation");
+		runButton.setToolTipText(Messages.getMessages().getString("run_simulation"));
 		runButton.addActionListener(actionListener);
 		toolbar.add(runButton);
 		stepButton = new JButton(Messages.getMessages().getString("step"));
-		stepButton.setToolTipText("Execute Simulation Step");
+		stepButton.setToolTipText(Messages.getMessages().getString("execute_simulation_step"));
 		stepButton.addActionListener(actionListener);
 		toolbar.add(stepButton);
 		pauseButton = new JToggleButton(Messages.getMessages().getString("pause"));
-		pauseButton.setToolTipText("Pause Simulation");
+		pauseButton.setToolTipText(Messages.getMessages().getString("pause_simulation"));
 		pauseButton.addActionListener(actionListener);
 		toolbar.add(pauseButton);
 		contentPanel.add(toolbar, java.awt.BorderLayout.NORTH);
@@ -231,8 +231,8 @@ public class AgentAppFrame extends JFrame {
 		statusLabel = new JLabel("");
 		statusLabel.setBorder(new javax.swing.border.EtchedBorder()); // BevelBorder
 		statusPanel.add(statusLabel, BorderLayout.CENTER);
-		cancelButton = new JButton("Cancel");
-		cancelButton.setToolTipText("Cancel Simulation");
+		cancelButton = new JButton(Messages.getMessages().getString("Cancel"));
+		cancelButton.setToolTipText(Messages.getMessages().getString("cancel_simulation"));
 		cancelButton.addActionListener(actionListener);
 		cancelButton.setPreferredSize(new java.awt.Dimension(80, 20));
 		cancelButton.setBorder(new javax.swing.border.EtchedBorder());
