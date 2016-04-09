@@ -79,9 +79,9 @@ public class MapAgent extends SimpleProblemSolvingAgent {
 			goal = goalTests[goalTestPos];
 			goalTestPos++;
 		}
-		notifier.notifyViews("CurrentLocation=In("
+		notifier.notifyViews(Messages.getMessages().getString("start_in") + ": "
 				+ state.getAttribute(DynAttributeNames.AGENT_LOCATION)
-				+ "), Goal=In(" + goal + ")");
+				+ ", " + Messages.getMessages().getString("goal_in")+ ": " + goal);
 
 		return goal;
 	}

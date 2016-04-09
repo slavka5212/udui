@@ -15,6 +15,7 @@ import aima.gui.framework.AgentAppEnvironmentView;
 import aima.gui.framework.AgentAppFrame;
 import aima.gui.framework.MessageLogger;
 import aima.gui.framework.SimpleAgentApp;
+import application.Messages;
 
 /**
  * Demo example of a route finding agent application with GUI. The main method
@@ -58,20 +59,20 @@ public class RouteFindingAgentApp extends SimpleAgentApp {
 
 		private MapType usedMap = null;
 		private static String[] ROMANIA_DESTS = new String[] {
-				"to Bucharest", "to Eforie", "to Neamt",
-				"to Random" };
+				Messages.getMessages().getString("to")+" Bucharest", Messages.getMessages().getString("to")+" Eforie", Messages.getMessages().getString("to")+" Neamt",
+				Messages.getMessages().getString("to")+" "+Messages.getMessages().getString("Random") };
 		private static String[] AUSTRALIA_DESTS = new String[] {
-				"to Port Hedland", "to Albany", "to Melbourne",
-				"to Random" };
+				Messages.getMessages().getString("to")+" Port Hedland", Messages.getMessages().getString("to")+" Albany", Messages.getMessages().getString("to")+" Melbourne",
+				Messages.getMessages().getString("to")+" "+Messages.getMessages().getString("Random") };
 
 		/** Creates a new frame. */
 		public RouteFindingAgentFrame() {
 			setTitle("RFA - the Route Finding Agent");
 			setSelectorItems(SCENARIO_SEL, new String[] {
-					"Romania, from Arad", "Romania, from Lugoj",
-					"Romania, from Fagaras",
-					"Australia, from Sydney",
-					"Australia, from Random" }, 0);
+					"Romania, "+Messages.getMessages().getString("from")+" Arad", "Romania, "+Messages.getMessages().getString("from")+" Lugoj",
+					"Romania, "+Messages.getMessages().getString("from")+" Fagaras",
+					"Australia, "+Messages.getMessages().getString("from")+" Sydney",
+					"Australia, "+Messages.getMessages().getString("from")+" "+Messages.getMessages().getString("Random") }, 0);
 			setSelectorItems(SEARCH_MODE_SEL, SearchFactory.getInstance()
 					.getSearchModeNames(), 1); // change the default!
 			setSelectorItems(HEURISTIC_SEL, new String[] { "=0", "SLD" }, 1);

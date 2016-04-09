@@ -14,6 +14,7 @@ import aima.core.search.uninformed.BreadthFirstSearch;
 import aima.core.search.uninformed.DepthFirstSearch;
 import aima.core.search.uninformed.IterativeDeepeningSearch;
 import aima.core.search.uninformed.UniformCostSearch;
+import application.Messages;
 
 /**
  * Useful factory for configuring search objects. Implemented as a singleton.
@@ -63,9 +64,14 @@ public class SearchFactory {
 	 * {@link #createSearch(int, int, HeuristicFunction)}.
 	 */
 	public String[] getSearchStrategyNames() {
-		return new String[] { "Depth First", "Breadth First",
-				"Iterative Deepening", "Uniform Cost", "Greedy Best First",
-				"A*", "Recursive Best First", "Hill Climbing" };
+		return new String[] {  Messages.getMessages().getString("alg_DepthFirstSearch"),
+				Messages.getMessages().getString("alg_BreadthFirstSearch"),
+				Messages.getMessages().getString("alg_IterativeDeepeningSearch"), 
+				Messages.getMessages().getString("alg_UniformCostSearch"), 
+				Messages.getMessages().getString("alg_GreedyBestFirstSearch"),
+				Messages.getMessages().getString("alg_AStarSearch"),
+				Messages.getMessages().getString("alg_RecursiveBestFirstSearch"),
+				Messages.getMessages().getString("alg_HillClimbingSearch") };
 	}
 
 	/**
@@ -74,7 +80,8 @@ public class SearchFactory {
 	 * {@link #createSearch(int, int, HeuristicFunction)}.
 	 */
 	public String[] getSearchModeNames() {
-		return new String[] { "Tree Search", "Graph Search" };
+		return new String[] { Messages.getMessages().getString("alg_TreeSearch"), 
+				Messages.getMessages().getString("alg_GraphSearch") };
 	}
 
 	/**

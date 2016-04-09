@@ -2,6 +2,7 @@ package aima.gui.applications.search.map;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.MissingResourceException;
 
 import aima.core.agent.Agent;
 import aima.core.environment.map.AdaptableHeuristicFunction;
@@ -79,9 +80,13 @@ public abstract class AbstractMapAgentController extends AgentAppController {
 	 */
 	public void run(MessageLogger logger) {
 		logger.log(Messages.getMessages().getString("simulation_start"));
-		logger.log("search: " + search.getClass().getName());
-		if (heuristic != null)
-			logger.log("heuristic: " + heuristic.getClass().getName());
+		String traslationSearch = search.getClass().getSimpleName();
+		try {
+			traslationSearch = Messages.getMessages().getString("alg_"+traslationSearch);
+		} catch (MissingResourceException mre) {
+		} 
+		logger.log(Messages.getMessages().getString("search")+": " + traslationSearch);
+//		if (heuristic != null) logger.log("heuristic: " + heuristic.getClass().getName());
 		MapEnvironment env = scenario.getEnv();
 		if (env.getAgents().isEmpty())
 			initAgents(logger);

@@ -7,6 +7,7 @@ import aima.core.agent.Percept;
 import aima.core.agent.impl.AbstractEnvironment;
 import aima.core.search.csp.Assignment;
 import aima.core.search.csp.CSP;
+import application.Messages;
 
 /**
  * Simple environment which maintains a CSP and an assignment. The state
@@ -95,8 +96,8 @@ public class CSPEnvironment extends AbstractEnvironment {
 		}
 		
 		public String toString() {
-			return "State Change "
-			+ (updateAssignment() ? assignment : "(Domain Reduction)");
+			return Messages.getMessages().getString("state_change")
+			+ (updateAssignment() ? assignment : "("+Messages.getMessages().getString("domain_reduction")+")");
 		}
 	}
 }

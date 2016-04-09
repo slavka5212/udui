@@ -76,9 +76,9 @@ public class MapColoringApp extends SimpleAgentApp {
 			setTitle("Map Coloring Application");
 			setSelectors(new String[] { ENV_SEL, STRATEGY_SEL }, new String[] {
 					"Select Environment", "Select Solution Strategy" });
-			setSelectorItems(ENV_SEL, new String[] { "Map of Australia",
-					"Map of Australia NSW=BLUE (for LCV)",
-					"Map of Australia WA=RED (for LCV)"}, 0);
+			setSelectorItems(ENV_SEL, new String[] { Messages.getMessages().getString("env_MapOfAustralia"),
+					Messages.getMessages().getString("env_MapOfAustralia")+" NSW=BLUE ("+Messages.getMessages().getString("for")+" LCV)",
+					Messages.getMessages().getString("env_MapOfAustralia")+" WA=RED ("+Messages.getMessages().getString("for")+" LCV)"}, 0);
 			setSelectorItems(STRATEGY_SEL, new String[] { "Backtracking",
 					"Backtracking + MRV & DEG",
 					"Backtracking + Forward Checking",
@@ -174,7 +174,7 @@ public class MapColoringApp extends SimpleAgentApp {
 					actionCount++;
 					Thread.sleep(200);
 				}
-				logger.log("Number of Steps: " + actionCount);
+				logger.log(Messages.getMessages().getString("number_of_steps")+ ": " + actionCount);
 				// logger.log(getStatistics());
 			} catch (InterruptedException e) {
 				// nothing to do here.
@@ -190,7 +190,7 @@ public class MapColoringApp extends SimpleAgentApp {
 				env.executeAction(null, actions.pop());
 				actionCount++;
 				if (actions.isEmpty())
-					logger.log("Number of Steps: " + actionCount);
+					logger.log(Messages.getMessages().getString("number_of_steps")+ ": " + actionCount);
 			}
 		}
 
