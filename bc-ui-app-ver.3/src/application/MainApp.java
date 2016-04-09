@@ -103,7 +103,7 @@ public class MainApp extends Application {
 			// Give the controller access to the main app.
 			viewsController = loader.getController();
 			viewsController.setMainApp(this);
-			viewsController.getLeftPane().getChildren().add(swingNode);
+			viewsController.getSwingPane().getChildren().add(swingNode);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -152,7 +152,7 @@ public class MainApp extends Application {
 		@Override
 		public void handle(ActionEvent event) {
 			try {
-				Pane leftP = viewsController.getLeftPane();
+				Pane leftP = viewsController.getSwingPane();
 				//if (currPanel != null) {
 					// Alert alert = new Alert(AlertType.INFORMATION);
 					// alert.setTitle(appClass.getSimpleName());

@@ -7,9 +7,7 @@ import javafx.scene.layout.Pane;
 
 public class VisualViewsController {
     @FXML
-    private Pane leftPane;
-    @FXML
-    private Pane rightPane;
+    private Pane swingPane;
     @FXML
     private AnchorPane visualPane;
 
@@ -40,8 +38,8 @@ public class VisualViewsController {
         this.mainApp = mainApp;
     }
     
-    public Pane getLeftPane(){
-    	return leftPane;
+    public Pane getSwingPane(){
+    	return swingPane;
     }
     
 }

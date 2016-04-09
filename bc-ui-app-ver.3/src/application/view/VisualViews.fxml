@@ -9,19 +9,6 @@
 <AnchorPane fx:id="visualPane" prefHeight="610.0" prefWidth="830.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.view.VisualViewsController">
   <!-- TODO Add Nodes -->
   <children>
-    <SplitPane dividerPositions="0.9782608695652174" focusTraversable="true" prefHeight="610.0" prefWidth="820.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0">
-          <children>
-            <Pane fx:id="leftPane" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-          </children>
-        </AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="15.0">
-          <children>
-            <Pane fx:id="rightPane" prefHeight="600.0" prefWidth="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-          </children>
-        </AnchorPane>
-      </items>
-    </SplitPane>
+    <Pane fx:id="swingPane" prefHeight="610.0" prefWidth="830.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
   </children>
 </AnchorPane>
