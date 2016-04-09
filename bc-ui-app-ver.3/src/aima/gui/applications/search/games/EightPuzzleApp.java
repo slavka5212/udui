@@ -302,7 +302,7 @@ public class EightPuzzleApp extends SimpleAgentApp {
 		/** Starts simulation. */
 		@Override
 		public void run(MessageLogger logger) {
-/*			logger.log("<simulation-log>");*/
+			logger.log(Messages.getMessages().getString("simulation_start"));
 			try {
 				addAgent();
 				while (!agent.isDone() && !frame.simulationPaused()) {
@@ -315,7 +315,7 @@ public class EightPuzzleApp extends SimpleAgentApp {
 				e.printStackTrace(); // probably search has failed...
 			}
 			logger.log(getStatistics());
-/*			logger.log("</simulation-log>\n");*/
+			logger.log(Messages.getMessages().getString("simulation_end")+"\n");
 		}
 
 		/** Executes one simulation step. */

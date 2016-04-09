@@ -78,7 +78,7 @@ public abstract class AbstractMapAgentController extends AgentAppController {
 	 * then starts simulation until done.
 	 */
 	public void run(MessageLogger logger) {
-		logger.log("<simulation-protocol>");
+		logger.log(Messages.getMessages().getString("simulation_start"));
 		logger.log("search: " + search.getClass().getName());
 		if (heuristic != null)
 			logger.log("heuristic: " + heuristic.getClass().getName());
@@ -91,7 +91,7 @@ public abstract class AbstractMapAgentController extends AgentAppController {
 				env.step();
 			}
 		} catch (InterruptedException e) {}
-		logger.log("</simulation-protocol>\n");
+		logger.log(Messages.getMessages().getString("simulation_end")+"\n");
 	}
 	
 	/**

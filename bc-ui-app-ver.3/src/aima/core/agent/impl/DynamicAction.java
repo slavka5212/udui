@@ -1,6 +1,9 @@
 package aima.core.agent.impl;
 
+import java.util.MissingResourceException;
+
 import aima.core.agent.Action;
+import application.Messages;
 
 /**
  * @author Ciaran O'Reilly
@@ -36,6 +39,11 @@ public class DynamicAction extends ObjectWithDynamicAttributes implements
 
 	@Override
 	public String describeType() {
+		// translation
+		try {
+			return Messages.getMessages().getString(Action.class.getSimpleName());
+		} catch (MissingResourceException mre) {
+		} 
 		return Action.class.getSimpleName();
 	}
 }

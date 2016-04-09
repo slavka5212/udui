@@ -166,7 +166,7 @@ public class MapColoringApp extends SimpleAgentApp {
 		/** Starts simulation. */
 		@Override
 		public void run(MessageLogger logger) {
-			logger.log("<simulation-log>");
+			logger.log(Messages.getMessages().getString("simulation_start"));
 			prepareActions();
 			try {
 				while (!actions.isEmpty() && !frame.simulationPaused()) {
@@ -179,7 +179,7 @@ public class MapColoringApp extends SimpleAgentApp {
 			} catch (InterruptedException e) {
 				// nothing to do here.
 			}
-			logger.log("</simulation-log>\n");
+			logger.log(Messages.getMessages().getString("simulation_end")+"\n");
 		}
 
 		/** Performs a simulation step. */

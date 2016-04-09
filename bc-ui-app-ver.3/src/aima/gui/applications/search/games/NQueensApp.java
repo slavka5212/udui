@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.MissingResourceException;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -315,7 +316,7 @@ public class NQueensApp extends SimpleAgentApp {
 		/** Starts simulation. */
 		@Override
 		public void run(MessageLogger logger) {
-			logger.log("<simulation-log>");
+			logger.log(Messages.getMessages().getString("simulation_start"));
 			try {
 				addAgent();
 				while (!agent.isDone() && !frame.simulationPaused()) {
@@ -328,7 +329,7 @@ public class NQueensApp extends SimpleAgentApp {
 				e.printStackTrace(); // probably search has failed...
 			}
 			logger.log(getStatistics());
-			logger.log("</simulation-log>\n");
+			logger.log(Messages.getMessages().getString("simulation_end")+"\n");
 		}
 
 		/** Executes one simulation step. */
@@ -361,7 +362,13 @@ public class NQueensApp extends SimpleAgentApp {
 			while (keys.hasNext()) {
 				String key = (String) keys.next();
 				String property = properties.getProperty(key);
-				result.append("\n" + key + " : " + property);
+				String traslationOfKey;
+				try {
+					traslationOfKey = Messages.getMessages().getString("metric_"+key);
+				} catch (MissingResourceException mre) {
+					traslationOfKey = key;
+				} 
+				result.append("\n" + traslationOfKey + ": " + property);
 			}
 			return result.toString();
 		}

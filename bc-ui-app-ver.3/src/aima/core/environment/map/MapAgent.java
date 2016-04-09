@@ -2,6 +2,7 @@ package aima.core.environment.map;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingResourceException;
 import java.util.Set;
 
 import aima.core.agent.Action;
@@ -13,6 +14,7 @@ import aima.core.agent.impl.DynamicState;
 import aima.core.search.framework.Problem;
 import aima.core.search.framework.Search;
 import aima.core.search.framework.SimpleProblemSolvingAgent;
+import application.Messages;
 
 /**
  * @author Ciaran O'Reilly
@@ -108,9 +110,15 @@ public class MapAgent extends SimpleProblemSolvingAgent {
 	@Override
 	protected void notifyViewOfMetrics() {
 		Set<String> keys = search.getMetrics().keySet();
+		notifier.notifyViews("");
 		for (String key : keys) {
-			notifier.notifyViews("METRIC[" + key + "]="
-					+ search.getMetrics().get(key));
+			String traslationOfKey;
+			try {
+				traslationOfKey = Messages.getMessages().getString("metric_"+key);
+			} catch (MissingResourceException mre) {
+				traslationOfKey = key;
+			} 
+			notifier.notifyViews(traslationOfKey + ": " + search.getMetrics().get(key));
 		}
 	}
 }
