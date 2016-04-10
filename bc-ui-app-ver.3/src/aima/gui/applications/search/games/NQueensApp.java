@@ -23,6 +23,7 @@ import aima.core.agent.Percept;
 import aima.core.agent.impl.AbstractEnvironment;
 import aima.core.environment.nqueens.AttackingPairsHeuristic;
 import aima.core.environment.nqueens.NQueensBoard;
+import aima.core.environment.nqueens.NQueensFitnessFunction;
 import aima.core.environment.nqueens.NQueensFunctionFactory;
 import aima.core.environment.nqueens.NQueensGoalTest;
 import aima.core.environment.nqueens.QueenAction;
@@ -33,6 +34,7 @@ import aima.core.search.framework.Search;
 import aima.core.search.framework.SearchAgent;
 import aima.core.search.framework.TreeSearch;
 import aima.core.search.informed.AStarSearch;
+import aima.core.search.local.GeneticAlgorithmSearch;
 import aima.core.search.local.HillClimbingSearch;
 import aima.core.search.local.Scheduler;
 import aima.core.search.local.SimulatedAnnealingSearch;
@@ -41,6 +43,7 @@ import aima.core.search.uninformed.DepthFirstSearch;
 import aima.core.search.uninformed.DepthLimitedSearch;
 import aima.core.search.uninformed.IterativeDeepeningSearch;
 import aima.core.util.datastructure.XYLocation;
+import aima.gui.demo.search.NQueensDemo;
 import aima.gui.framework.AgentAppController;
 import aima.gui.framework.AgentAppEnvironmentView;
 import aima.gui.framework.AgentAppFrame;
@@ -70,7 +73,10 @@ public class NQueensApp extends SimpleAgentApp {
 			new IterativeDeepeningSearch(),
 			new AStarSearch(new GraphSearch(), new AttackingPairsHeuristic()),
 			new HillClimbingSearch(new AttackingPairsHeuristic()),
-			new SimulatedAnnealingSearch(new AttackingPairsHeuristic(), new Scheduler(20, 0.045, 1000))
+			new SimulatedAnnealingSearch(new AttackingPairsHeuristic(), new Scheduler(20, 0.045, 1000)),
+			new GeneticAlgorithmSearch<Integer>(8, 50,
+					 new NQueensFitnessFunction().getFiniteAlphabetForBoardOfSize(8),
+					0.15)
 	));
 
 	static void loadNewSearchNames() {
@@ -82,7 +88,8 @@ public class NQueensApp extends SimpleAgentApp {
 				Messages.getMessages().getString("alg_IterativeDeepeningSearch"),
 				Messages.getMessages().getString("alg_AStarSearch")+ " (" + Messages.getMessages().getString("alg_AttackingPairsHeuristic") + ")",
 				Messages.getMessages().getString("alg_HillClimbingSearch")+ " (" + Messages.getMessages().getString("alg_AttackingPairsHeuristic") + ")",
-				Messages.getMessages().getString("alg_SimulatedAnnealingSearch")
+				Messages.getMessages().getString("alg_SimulatedAnnealingSearch"),
+				"Genetic Algorithm (8)"
 		));
 	}
 
