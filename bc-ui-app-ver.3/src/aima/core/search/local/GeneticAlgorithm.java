@@ -118,7 +118,6 @@ public class GeneticAlgorithm<A> {
 		int cnt = 0;
 		do {
 			bestIndividual = nextGeneration(population, fitnessFn);
-			System.out.println(bestIndividual.getRepresentation());			
 			cnt++;
 
 			// until some individual is fit enough, or enough time has elapsed
