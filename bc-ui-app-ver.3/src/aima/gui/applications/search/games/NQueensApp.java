@@ -74,9 +74,8 @@ public class NQueensApp extends SimpleAgentApp {
 			new AStarSearch(new GraphSearch(), new AttackingPairsHeuristic()),
 			new HillClimbingSearch(new AttackingPairsHeuristic()),
 			new SimulatedAnnealingSearch(new AttackingPairsHeuristic(), new Scheduler(20, 0.045, 1000)),
-			new GeneticAlgorithmSearch<Integer>(8, 50,
-					 new NQueensFitnessFunction().getFiniteAlphabetForBoardOfSize(8),
-					0.15)
+			new GeneticAlgorithmSearch<Integer>(50, 0.15, 0L),
+			new GeneticAlgorithmSearch<Integer>(50, 0.15, 1000L)
 	));
 
 	static void loadNewSearchNames() {
@@ -89,7 +88,8 @@ public class NQueensApp extends SimpleAgentApp {
 				Messages.getMessages().getString("alg_AStarSearch")+ " (" + Messages.getMessages().getString("alg_AttackingPairsHeuristic") + ")",
 				Messages.getMessages().getString("alg_HillClimbingSearch")+ " (" + Messages.getMessages().getString("alg_AttackingPairsHeuristic") + ")",
 				Messages.getMessages().getString("alg_SimulatedAnnealingSearch"),
-				"Genetic Algorithm (8)"
+				"Genetic Algorithm",
+				"Genetic Algorithm (1 second)"
 		));
 	}
 

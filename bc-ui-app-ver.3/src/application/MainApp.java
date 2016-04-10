@@ -152,12 +152,12 @@ public class MainApp extends Application {
 		@Override
 		public void handle(ActionEvent event) {
 			try {
-				Pane leftP = viewsController.getSwingPane();
+				Pane viewP = viewsController.getSwingPane();
 				//if (currPanel != null) {
 					// Alert alert = new Alert(AlertType.INFORMATION);
 					// alert.setTitle(appClass.getSimpleName());
 					// alert.showAndWait();
-					leftP.getChildren().remove(swingNode);
+				viewP.getChildren().remove(swingNode);
 				//}
 				// System.setOut(outStream);
 				Object instance = appClass.newInstance();
@@ -166,11 +166,11 @@ public class MainApp extends Application {
 				JFrame af = (JFrame) m.invoke(instance, (Object[]) null);
 				currPanel = (JComponent) af.getContentPane().getComponent(0);
 				af.getContentPane().remove(currPanel);
-				currPanel.setMinimumSize(new Dimension((int) leftP.getWidth(), (int) leftP.getHeight()));
+				currPanel.setMinimumSize(new Dimension((int) viewP.getWidth(), (int) viewP.getHeight()));
 				// Set currPanel as swingNode
 				swingNode.setContent(currPanel);
 				// Add swingNode to leftPane
-				leftP.getChildren().add(swingNode);
+				viewP.getChildren().add(swingNode);
 
 			} catch (Exception e) {
 				e.printStackTrace();
