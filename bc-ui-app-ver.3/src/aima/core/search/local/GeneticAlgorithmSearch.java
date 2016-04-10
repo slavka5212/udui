@@ -1,15 +1,24 @@
 package aima.core.search.local;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 
+import aima.core.agent.Action;
+import aima.core.environment.nqueens.NQueensFitnessFunction;
+import aima.core.environment.nqueens.QueenAction;
 import aima.core.search.framework.GoalTest;
 import aima.core.search.framework.Metrics;
+import aima.core.search.framework.Problem;
+import aima.core.search.framework.Search;
 import aima.core.util.Util;
+import aima.core.util.datastructure.XYLocation;
 
 /**
  * Artificial Intelligence A Modern Approach (3rd Edition): Figure 4.8, page
@@ -46,32 +55,37 @@ import aima.core.util.Util;
  * 
  * @author Ciaran O'Reilly
  * @author Mike Stampone
+ * @param <A>
  * 
  * @param <A>
  *            the type of the alphabet used in the representation of the
  *            individuals in the population (this is to provide flexibility in
  *            terms of how a problem can be encoded).
  */
-public class GeneticAlgorithm<A> {
+public class GeneticAlgorithmSearch<A> implements Search {
+	
 	protected static final String POPULATION_SIZE = "populationSize";
 	protected static final String ITERATIONS = "iterations";
 	protected static final String TIME_IN_MILLISECONDS = "timeInMilliseconds";
 	//
 	protected Metrics metrics = new Metrics();
 	//
+	
+	protected static int boardSize = 8;
 	protected int individualLength;
 	protected List<A> finiteAlphabet;
 	protected double mutationProbability;
 	protected Random random;
 
-	public GeneticAlgorithm(int individualLength, Set<A> finiteAlphabet,
-			double mutationProbability) {
-		this(individualLength, finiteAlphabet, mutationProbability,
+	public GeneticAlgorithmSearch(int boardSize, int individualLength, Set<A> finiteAlphabet,
+			double mutationProbability) {	
+		this(boardSize, individualLength, finiteAlphabet, mutationProbability,
 				new Random());
 	}
 
-	public GeneticAlgorithm(int individualLength, Set<A> finiteAlphabet,
+	public GeneticAlgorithmSearch(int boardSize, int individualLength, Set<A> finiteAlphabet,
 			double mutationProbability, Random random) {
+		this.boardSize = boardSize;
 		this.individualLength = individualLength;
 		this.finiteAlphabet = new ArrayList<A>(finiteAlphabet);
 		this.mutationProbability = mutationProbability;
@@ -351,5 +365,125 @@ public class GeneticAlgorithm<A> {
 						+ this.individualLength);
 			}
 		}
+	}
+	
+	public static void nQueensGeneticAlgorithmSearch() {
+		System.out.println("\nNQueensDemo GeneticAlgorithm  -->");
+		try {
+			NQueensFitnessFunction fitnessFunction = new NQueensFitnessFunction();
+			// Generate an initial population
+			Set<Individual<Integer>> population = new HashSet<Individual<Integer>>();
+			for (int i = 0; i < 50; i++) {
+				population.add(fitnessFunction
+						.generateRandomIndividual(boardSize));
+			}
+
+			GeneticAlgorithm<Integer> ga = new GeneticAlgorithm<Integer>(
+					boardSize,
+					fitnessFunction.getFiniteAlphabetForBoardOfSize(boardSize),
+					0.15);
+
+			// Run for a set amount of time
+			Individual<Integer> bestIndividual = ga.geneticAlgorithm(
+					population, fitnessFunction, fitnessFunction, 1000L);
+
+			System.out.println("Max Time (1 second) Best Individual=\n"
+					+ fitnessFunction.getBoardForIndividual(bestIndividual));
+			System.out.println("Board Size      = " + boardSize);
+			System.out.println("# Board Layouts = "
+					+ (new BigDecimal(boardSize)).pow(boardSize));
+			System.out.println("Fitness         = "
+					+ fitnessFunction.getValue(bestIndividual));
+			System.out.println("Is Goal         = "
+					+ fitnessFunction.isGoalState(bestIndividual));
+			System.out.println("Population Size = " + ga.getPopulationSize());
+			System.out.println("Itertions       = " + ga.getIterations());
+			System.out.println("Took            = "
+					+ ga.getTimeInMilliseconds() + "ms.");
+
+			// Run till goal is achieved
+			bestIndividual = ga.geneticAlgorithm(population, fitnessFunction,
+					fitnessFunction, 0L);
+
+			System.out.println("");
+			System.out.println("Goal Test Best Individual=\n"
+					+ fitnessFunction.getBoardForIndividual(bestIndividual));
+			System.out.println("Board Size      = " + boardSize);
+			System.out.println("# Board Layouts = "
+					+ (new BigDecimal(boardSize)).pow(boardSize));
+			System.out.println("Fitness         = "
+					+ fitnessFunction.getValue(bestIndividual));
+			System.out.println("Is Goal         = "
+					+ fitnessFunction.isGoalState(bestIndividual));
+			System.out.println("Population Size = " + ga.getPopulationSize());
+			System.out.println("Itertions       = " + ga.getIterations());
+			System.out.println("Took            = "
+					+ ga.getTimeInMilliseconds() + "ms.");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void printInstrumentation(Properties properties) {
+		Iterator<Object> keys = properties.keySet().iterator();
+		while (keys.hasNext()) {
+			String key = (String) keys.next();
+			String property = properties.getProperty(key);
+			System.out.println(key + " : " + property);
+		}
+
+	}
+
+	private static void printActions(List<Action> actions) {
+		for (int i = 0; i < actions.size(); i++) {
+			String action = actions.get(i).toString();
+			System.out.println(action);
+		}
+	}
+
+	@Override
+	public List<Action> search(Problem p) throws Exception {
+		// TODO Auto-generated method stub
+		// Run for a set amount of time
+		ArrayList<Action> result = new ArrayList<Action>();
+		try {
+			NQueensFitnessFunction fitnessFunction = new NQueensFitnessFunction();
+			// Generate an initial population
+			Set<Individual<Integer>> population = new HashSet<Individual<Integer>>();
+			for (int i = 0; i < 50; i++) {
+				population.add(fitnessFunction
+						.generateRandomIndividual(boardSize));
+			}
+
+			GeneticAlgorithm<Integer> ga = new GeneticAlgorithm<Integer>(
+					boardSize,
+					fitnessFunction.getFiniteAlphabetForBoardOfSize(boardSize),
+					0.15);
+			Individual<Integer> bestIndividual = ga.geneticAlgorithm(
+					population, fitnessFunction, fitnessFunction, 1000L);
+			List<Integer> representationList = bestIndividual.getRepresentation();
+			for (int i = 0; i < representationList.size(); i++) {
+				result.add(new QueenAction("placeQueenAt", new XYLocation(i, representationList.get(i))));
+			};
+			
+			
+			System.out.println("Max Time (1 second) Best Individual=\n"
+					+ fitnessFunction.getBoardForIndividual(bestIndividual));
+			System.out.println("Board Size      = " + boardSize);
+			System.out.println("# Board Layouts = "
+					+ (new BigDecimal(boardSize)).pow(boardSize));
+			System.out.println("Fitness         = "
+					+ fitnessFunction.getValue(bestIndividual));
+			System.out.println("Is Goal         = "
+					+ fitnessFunction.isGoalState(bestIndividual));
+			System.out.println("Population Size = " + ga.getPopulationSize());
+			System.out.println("Itertions       = " + ga.getIterations());
+			System.out.println("Took            = "
+					+ ga.getTimeInMilliseconds() + "ms.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return result;
 	}
 }
