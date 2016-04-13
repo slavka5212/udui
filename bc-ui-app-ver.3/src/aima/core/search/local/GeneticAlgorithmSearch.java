@@ -14,6 +14,7 @@ import aima.core.search.framework.Metrics;
 import aima.core.search.framework.Problem;
 import aima.core.search.framework.Search;
 import aima.core.util.datastructure.XYLocation;
+import application.Messages;
 
 /**
  * Genetic Algorithm Search for NQueensApp
@@ -21,6 +22,12 @@ import aima.core.util.datastructure.XYLocation;
  * @author Slavka Ivanicova
  */
 public class GeneticAlgorithmSearch<A> implements Search {
+	
+	public static final String METRIC_FITNESS = "fitness";
+	public static final String METRIC_IS_GOAL = "isGoal";
+	public static final String METRIC_POPULATION_SIZE = "populationSize";
+	public static final String METRIC_ITERATIONS = "itertions";
+	public static final String METRIC_TOOK = "took";
 	
 	protected Metrics metrics = new Metrics();
 	
@@ -30,10 +37,12 @@ public class GeneticAlgorithmSearch<A> implements Search {
 
 	public GeneticAlgorithmSearch(int numberOfPopulation,
 			double mutationProbability, long timeLimit) {	
+		metrics = new Metrics();
 		this.numberOfPopulation = numberOfPopulation;
 		this.mutationProbability = mutationProbability;
 		this.timeLimit = timeLimit;
 	}
+
 
 	/**
 	 * Returns all the metrics of the genetic algorithm.
@@ -67,26 +76,32 @@ public class GeneticAlgorithmSearch<A> implements Search {
 			for (Individual<Integer> individual : listOfIndividuals) {
 				List<Integer> representationList = individual.getRepresentation();
 				System.out.println(representationList);
-				for (int i = 0; i < representationList.size(); i++) {
+				/*for (int i = 0; i < representationList.size(); i++) {
 					result.add(new QueenAction("moveQueenTo", new XYLocation(i, representationList.get(i))));
-				};
+				};*/
 			}
 			
 			Individual<Integer> bestIndividual = listOfIndividuals.get(listOfIndividuals.size()-1);
-			/*
+			
 			List<Integer> representationList = bestIndividual.getRepresentation();
 			for (int i = 0; i < representationList.size(); i++) {
 				result.add(new QueenAction("placeQueenAt", new XYLocation(i, representationList.get(i))));
-			};*/
+			};
 			
 			
-			System.out.println("Board Size      = " + boardSize);
-			System.out.println("# Board Layouts = " + (new BigDecimal(boardSize)).pow(boardSize));
-			System.out.println("Fitness         = " + fitnessFunction.getValue(bestIndividual));
-			System.out.println("Is Goal         = "	+ fitnessFunction.isGoalState(bestIndividual));
-			System.out.println("Population Size = " + ga.getPopulationSize());
-			System.out.println("Itertions       = " + ga.getIterations());
-			System.out.println("Took            = " + ga.getTimeInMilliseconds() + "ms.");
+			// System.out.println("Board Size      = " + boardSize);
+			// System.out.println("# Board Layouts = " + (new BigDecimal(boardSize)).pow(boardSize));
+			metrics.set(METRIC_FITNESS, fitnessFunction.getValue(bestIndividual));	
+			metrics.set(METRIC_IS_GOAL, Messages.getMessages().getString(Boolean.toString(fitnessFunction.isGoalState(bestIndividual))));	
+			metrics.set(METRIC_POPULATION_SIZE, ga.getPopulationSize());	
+			metrics.set(METRIC_ITERATIONS, ga.getIterations());	
+			metrics.set(METRIC_TOOK, Long.toString(ga.getTimeInMilliseconds()) + "ms.");
+			/*
+			System.out.println("Fitness        " + " : " + fitnessFunction.getValue(bestIndividual));
+			System.out.println("Is Goal        " + " : "	+ fitnessFunction.isGoalState(bestIndividual));
+			System.out.println("Population Size" + " : " + ga.getPopulationSize());
+			System.out.println("Itertions      " + " : " + ga.getIterations());
+			System.out.println("Took           " + " : " + ga.getTimeInMilliseconds() + "ms.");*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 

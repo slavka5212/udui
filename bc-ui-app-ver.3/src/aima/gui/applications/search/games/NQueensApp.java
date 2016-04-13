@@ -88,8 +88,8 @@ public class NQueensApp extends SimpleAgentApp {
 				Messages.getMessages().getString("alg_AStarSearch")+ " (" + Messages.getMessages().getString("alg_AttackingPairsHeuristic") + ")",
 				Messages.getMessages().getString("alg_HillClimbingSearch")+ " (" + Messages.getMessages().getString("alg_AttackingPairsHeuristic") + ")",
 				Messages.getMessages().getString("alg_SimulatedAnnealingSearch"),
-				"Genetic Algorithm",
-				"Genetic Algorithm (1 second)"
+				Messages.getMessages().getString("alg_GeneticAlgorithm"),
+				Messages.getMessages().getString("alg_GeneticAlgorithm")+ " (1 " + Messages.getMessages().getString("second") + ")"
 		));
 	}
 

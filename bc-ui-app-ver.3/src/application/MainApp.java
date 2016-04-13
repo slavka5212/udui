@@ -26,6 +26,11 @@ import aima.gui.applications.search.map.RouteFindingAgentApp;
 import application.view.RootLayoutController;
 import application.view.VisualViewsController;
 
+/**
+ * The Main Application
+ * 
+ * @author Slavka Ivanicova
+ */
 public class MainApp extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;

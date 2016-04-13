@@ -26,6 +26,14 @@ public class Metrics {
 	public void set(String name, long l) {
 		hash.put(name, Long.toString(l));
 	}
+	
+	public void set(String name, boolean b) {
+		hash.put(name, Boolean.toString(b));
+	}
+	
+	public void set(String name, String s) {
+		hash.put(name, s);
+	}
 
 	public int getInt(String name) {
 		return new Integer(hash.get(name)).intValue();
@@ -50,4 +58,5 @@ public class Metrics {
 	public String toString() {
 		return hash.toString();
 	}
+
 }

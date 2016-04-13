@@ -4,6 +4,11 @@ import java.util.*;
 
 import org.eclipse.osgi.util.NLS;
 
+/**
+ * MessageBundle
+ * 
+ * @author Slavka Ivanicova
+ */
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "application.translation.messages"; //$NON-NLS-1$
   
