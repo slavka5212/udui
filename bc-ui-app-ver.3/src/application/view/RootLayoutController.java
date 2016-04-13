@@ -122,7 +122,7 @@ public class RootLayoutController {
 	public void addItem(Menu subMenu, Class<?> appClass) {
 		MenuItem item = new MenuItem(Messages.getMessages().getString("app_"+appClass.getSimpleName()));
 		subMenu.getItems().add(item);
-		item.setOnAction(mainApp.new AppStarter(appClass));
+		item.setOnAction(mainApp.new AppStarter(appClass, subMenu.getText()));
 	}
 
 	public MenuBar getMainMenu() {

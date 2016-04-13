@@ -92,6 +92,8 @@ public class MainApp extends Application {
 			viewsController = loader.getController();
 			viewsController.setMainApp(this);
 			viewsController.getSwingPane().getChildren().add(swingNode);
+			
+			viewsController.setVisibleTitlePane(false); 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -132,9 +134,15 @@ public class MainApp extends Application {
 	 */
 	public class AppStarter implements EventHandler<ActionEvent> {
 		Class<?> appClass;
+		String whereIs = "";
 
 		public AppStarter(Class<?> ac) {
 			appClass = ac;
+		}
+
+		public AppStarter(Class<?> ac, String subMenu) {
+			appClass = ac;
+			whereIs = subMenu;
 		}
 
 		@Override
@@ -153,6 +161,9 @@ public class MainApp extends Application {
 				swingNode.setContent(currPanel);
 				// Add swingNode to leftPane
 				viewP.getChildren().add(swingNode);
+				
+				viewsController.setVisibleTitlePane(true); 
+				viewsController.setTitlePaneText(whereIs + " > " + Messages.getMessages().getString("app_"+appClass.getSimpleName()));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

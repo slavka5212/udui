@@ -2,6 +2,7 @@ package application.view;
 
 import application.MainApp;
 import javafx.fxml.FXML;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -10,6 +11,8 @@ public class VisualViewsController {
     private Pane swingPane;
     @FXML
     private AnchorPane visualPane;
+    @FXML
+    private TitledPane titlePane;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -41,5 +44,13 @@ public class VisualViewsController {
     public Pane getSwingPane(){
     	return swingPane;
     }
-    
+
+	public void setTitlePaneText(String text) {
+		titlePane.setFocusTraversable(true);
+		titlePane.setText(text);
+	}
+	
+	public void setVisibleTitlePane(boolean value) {
+		titlePane.setVisible(value);
+	}
 }

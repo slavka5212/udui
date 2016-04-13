@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane fx:id="visualPane" prefHeight="610.0" prefWidth="830.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.view.VisualViewsController">
+<AnchorPane fx:id="visualPane" mouseTransparent="false" prefHeight="610.0" prefWidth="830.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.view.VisualViewsController">
   <!-- TODO Add Nodes -->
   <children>
-    <Pane fx:id="swingPane" prefHeight="610.0" prefWidth="830.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <BorderPane prefHeight="610.0" prefWidth="830.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <center>
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="580.0" prefWidth="830.0">
+          <children>
+            <Pane fx:id="swingPane" prefHeight="586.0" prefWidth="830.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+          </children>
+        </AnchorPane>
+      </center>
+      <top>
+        <TitledPane id="titled-pane" fx:id="titlePane" animated="false" collapsible="false" content="$null" minHeight="22.0" mouseTransparent="false" prefHeight="22.0" prefWidth="830.0" text="untitled">
+          <stylesheets>
+            <URL value="@../application.css" />
+          </stylesheets>
+          <BorderPane.margin>
+            <Insets />
+          </BorderPane.margin>
+        </TitledPane>
+      </top>
+    </BorderPane>
   </children>
 </AnchorPane>
