@@ -5,23 +5,15 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-import org.eclipse.osgi.util.NLS;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -50,7 +42,6 @@ public class MainApp extends Application {
 		
 		Messages.setMessages(currLanguage);
 		swingNode = new SwingNode();
-		//currPanel = null;
 
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle(Messages.getMessages().getString("MainApp_title"));
@@ -94,12 +85,9 @@ public class MainApp extends Application {
 			// Load visual views.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/VisualViews.fxml")); //$NON-NLS-1$
-
 			AnchorPane visualViews = (AnchorPane) loader.load();
-
 			// Set visual views into the center of root layout.
 			rootLayout.setCenter(visualViews);
-
 			// Give the controller access to the main app.
 			viewsController = loader.getController();
 			viewsController.setMainApp(this);
@@ -153,13 +141,7 @@ public class MainApp extends Application {
 		public void handle(ActionEvent event) {
 			try {
 				Pane viewP = viewsController.getSwingPane();
-				//if (currPanel != null) {
-					// Alert alert = new Alert(AlertType.INFORMATION);
-					// alert.setTitle(appClass.getSimpleName());
-					// alert.showAndWait();
 				viewP.getChildren().remove(swingNode);
-				//}
-				// System.setOut(outStream);
 				Object instance = appClass.newInstance();
 				Method m = appClass.getMethod("constructApplicationFrame", //$NON-NLS-1$
 						new Class[0]);
@@ -171,7 +153,6 @@ public class MainApp extends Application {
 				swingNode.setContent(currPanel);
 				// Add swingNode to leftPane
 				viewP.getChildren().add(swingNode);
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
