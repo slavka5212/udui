@@ -4,6 +4,7 @@ import javax.swing.JComponent;
 
 import aima.core.agent.Environment;
 import aima.core.agent.EnvironmentView;
+import application.Messages;
 
 /**
  * Base class for all graphical environment view implementations.
@@ -63,7 +64,7 @@ extends JComponent implements EnvironmentView {
 	
 	/** Forwards a given message to the selected message logger. */
 	public void notify(String msg) {
-		if (logger != null)
+		if (logger != null && !msg.contains(Messages.getMessages().getString("Action")))
 			logger.log(msg);
 	}
 }

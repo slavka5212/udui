@@ -56,32 +56,37 @@ public class GeneticAlgorithmSearch<A> implements Search {
 				population.add(fitnessFunction
 						.generateRandomIndividual(boardSize));
 			}
-
-			GeneticAlgorithm<Integer> ga = new GeneticAlgorithm<Integer>(
+			
+			NQueenGeneticAlgorithm<Integer> ga = new NQueenGeneticAlgorithm<Integer>(
 					boardSize,
 					fitnessFunction.getFiniteAlphabetForBoardOfSize(boardSize),
 					mutationProbability);
-			Individual<Integer> bestIndividual = ga.geneticAlgorithm(
+			List<Individual<Integer>> listOfIndividuals = ga.geneticAlgorithmList(
 					population, fitnessFunction, fitnessFunction, timeLimit);
+			
+			for (Individual<Integer> individual : listOfIndividuals) {
+				List<Integer> representationList = individual.getRepresentation();
+				System.out.println(representationList);
+				for (int i = 0; i < representationList.size(); i++) {
+					result.add(new QueenAction("moveQueenTo", new XYLocation(i, representationList.get(i))));
+				};
+			}
+			
+			Individual<Integer> bestIndividual = listOfIndividuals.get(listOfIndividuals.size()-1);
+			/*
 			List<Integer> representationList = bestIndividual.getRepresentation();
 			for (int i = 0; i < representationList.size(); i++) {
 				result.add(new QueenAction("placeQueenAt", new XYLocation(i, representationList.get(i))));
-			};
+			};*/
 			
 			
-			System.out.println("Max Time (1 second) Best Individual=\n"
-					+ fitnessFunction.getBoardForIndividual(bestIndividual));
 			System.out.println("Board Size      = " + boardSize);
-			System.out.println("# Board Layouts = "
-					+ (new BigDecimal(boardSize)).pow(boardSize));
-			System.out.println("Fitness         = "
-					+ fitnessFunction.getValue(bestIndividual));
-			System.out.println("Is Goal         = "
-					+ fitnessFunction.isGoalState(bestIndividual));
+			System.out.println("# Board Layouts = " + (new BigDecimal(boardSize)).pow(boardSize));
+			System.out.println("Fitness         = " + fitnessFunction.getValue(bestIndividual));
+			System.out.println("Is Goal         = "	+ fitnessFunction.isGoalState(bestIndividual));
 			System.out.println("Population Size = " + ga.getPopulationSize());
 			System.out.println("Itertions       = " + ga.getIterations());
-			System.out.println("Took            = "
-					+ ga.getTimeInMilliseconds() + "ms.");
+			System.out.println("Took            = " + ga.getTimeInMilliseconds() + "ms.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
