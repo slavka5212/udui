@@ -75,7 +75,7 @@ public class MapColoringApp extends SimpleAgentApp {
 		public MapColoringFrame() {
 			setTitle("Map Coloring Application");
 			setSelectors(new String[] { ENV_SEL, STRATEGY_SEL }, new String[] {
-					"Select Environment", "Select Solution Strategy" });
+					Messages.getMessages().getString("select_environment"), Messages.getMessages().getString("select_solution_strategy") });
 			setSelectorItems(ENV_SEL, new String[] { Messages.getMessages().getString("env_MapOfAustralia"),
 					Messages.getMessages().getString("env_MapOfAustralia")+" NSW=BLUE ("+Messages.getMessages().getString("for")+" LCV)",
 					Messages.getMessages().getString("env_MapOfAustralia")+" WA=RED ("+Messages.getMessages().getString("for")+" LCV)"}, 0);

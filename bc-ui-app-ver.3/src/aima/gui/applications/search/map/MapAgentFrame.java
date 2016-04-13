@@ -1,6 +1,7 @@
 package aima.gui.applications.search.map;
 
 import aima.gui.framework.AgentAppFrame;
+import application.Messages;
 
 /**
  * Universal frame for experiments with route planning agents. It configures the
@@ -26,9 +27,12 @@ public class MapAgentFrame extends AgentAppFrame {
 	public MapAgentFrame() {
 		setSelectors(new String[] { SCENARIO_SEL, DESTINATION_SEL, AGENT_SEL,
 				SEARCH_SEL, SEARCH_MODE_SEL, HEURISTIC_SEL }, new String[] {
-				"Select Scenario", "Select Destinations", "Select Agent",
-				"Select Search Strategy", "Select Search Mode",
-				"Select Heuristic" });
+				Messages.getMessages().getString("select_scenario"),
+				Messages.getMessages().getString("select_destinations"), 
+				Messages.getMessages().getString("select_agent"),
+				Messages.getMessages().getString("select_search_strategy"), 
+				Messages.getMessages().getString("select_search_mode"),
+				Messages.getMessages().getString("select_heuristic") });
 		setSelectorItems(SEARCH_SEL, SearchFactory.getInstance()
 				.getSearchStrategyNames(), 5);
 		setSelectorItems(SEARCH_MODE_SEL, SearchFactory.getInstance()

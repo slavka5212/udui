@@ -124,7 +124,8 @@ public class EightPuzzleApp extends SimpleAgentApp {
 		public EightPuzzleFrame() {
 			setTitle("Eight Puzzle Application");
 			setSelectors(new String[] { ENV_SEL, SEARCH_SEL }, new String[] {
-					"Select Environment", "Select Search" });
+					Messages.getMessages().getString("select_environment"), 
+					Messages.getMessages().getString("select_search") });
 			setSelectorItems(ENV_SEL, 
 					new String[] { Messages.getMessages().getString("env_ThreeMoves"),
 							Messages.getMessages().getString("env_Medium"), 

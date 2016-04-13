@@ -136,8 +136,9 @@ public class NQueensApp extends SimpleAgentApp {
 		public NQueensFrame() {
 			setTitle("N-Queens Application");
 			setSelectors(new String[] { ENV_SEL, PROBLEM_SEL, SEARCH_SEL },
-					new String[] { "Select Environment",
-							"Select Problem Formulation", "Select Search" });
+					new String[] { Messages.getMessages().getString("select_environment"),
+							Messages.getMessages().getString("select_problem_formulation"),
+							Messages.getMessages().getString("select_search") });
 			setSelectorItems(ENV_SEL, new String[] { Messages.getMessages().getString("env_4Queens"),
 					"8 "+Messages.getMessages().getString("env_Queens"),
 					"16 "+Messages.getMessages().getString("env_Queens"), 
