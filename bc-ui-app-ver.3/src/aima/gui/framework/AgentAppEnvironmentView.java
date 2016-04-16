@@ -64,7 +64,9 @@ extends JComponent implements EnvironmentView {
 	
 	/** Forwards a given message to the selected message logger. */
 	public void notify(String msg) {
-		if (logger != null && !msg.contains(Messages.getMessages().getString("Action")))
+		if (logger != null) {
+			msg = msg.replace(Messages.getMessages().getString("Action"), "");
 			logger.log(msg);
+		}	
 	}
 }

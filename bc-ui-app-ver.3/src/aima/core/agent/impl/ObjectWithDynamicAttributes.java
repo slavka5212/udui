@@ -38,7 +38,7 @@ public abstract class ObjectWithDynamicAttributes {
 	public String describeAttributes() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("[");
+		// sb.append("[");
 		boolean first = true;
 		for (Object key : attributes.keySet()) {
 			if (first) {
@@ -57,6 +57,8 @@ public abstract class ObjectWithDynamicAttributes {
 				sb.append(keyTraslation);
 				sb.append(": ");
 			}	
+			
+			//System.out.println(attributes.get(key));
 			String traslation = attributes.get(key).toString();
 			try {
 				traslation = Messages.getMessages().getString(traslation);
@@ -64,9 +66,8 @@ public abstract class ObjectWithDynamicAttributes {
 			}
 			sb.append(traslation);
 			
-
 		}
-		sb.append("]");
+		//sb.append("]");
 
 		return sb.toString();
 	}

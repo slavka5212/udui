@@ -413,15 +413,30 @@ public class NQueensApp extends SimpleAgentApp {
 		public EnvironmentState executeAction(Agent agent, Action action) {
 			if (action instanceof QueenAction) {
 				QueenAction act = (QueenAction) action;
-				XYLocation loc = new XYLocation(act.getX(), act.getY());
-				if (act.getName() == QueenAction.PLACE_QUEEN)
-					board.addQueenAt(loc);
-				else if (act.getName() == QueenAction.REMOVE_QUEEN)
-					board.removeQueenFrom(loc);
-				else if (act.getName() == QueenAction.MOVE_QUEEN)
-					board.moveQueenTo(loc);
-				if (agent == null)
-					updateEnvironmentViewsAgentActed(agent, action, null);
+				
+				if (act.getLocation() == null)  {
+					// for more actions at once 
+					for (XYLocation loc : act.getMoreLocations()) {
+						if (act.getName() == QueenAction.PLACE_QUEEN)
+							board.addQueenAt(loc);
+						else if (act.getName() == QueenAction.REMOVE_QUEEN)
+							board.removeQueenFrom(loc);
+						else if (act.getName() == QueenAction.MOVE_QUEEN)
+							board.moveQueenTo(loc);
+						if (agent == null)
+							updateEnvironmentViewsAgentActed(agent, action, null);
+					}
+				} else  {
+					XYLocation loc = new XYLocation(act.getX(), act.getY());
+					if (act.getName() == QueenAction.PLACE_QUEEN)
+						board.addQueenAt(loc);
+					else if (act.getName() == QueenAction.REMOVE_QUEEN)
+						board.removeQueenFrom(loc);
+					else if (act.getName() == QueenAction.MOVE_QUEEN)
+						board.moveQueenTo(loc);
+					if (agent == null)
+						updateEnvironmentViewsAgentActed(agent, action, null);
+				}
 			}
 			return null;
 		}

@@ -1,5 +1,7 @@
 package aima.core.environment.nqueens;
 
+import java.util.List;
+
 import aima.core.agent.impl.DynamicAction;
 import aima.core.util.datastructure.XYLocation;
 
@@ -16,6 +18,7 @@ public class QueenAction extends DynamicAction {
 	public static final String MOVE_QUEEN = "moveQueenTo";
 
 	public static final String ATTRIBUTE_QUEEN_LOC = "location";
+	public static final String ALL_QUEENS_LOC = "allLocations";
 
 	/**
 	 * Creates a queen action. Supported values of type are {@link #PLACE_QUEEN}
@@ -24,6 +27,16 @@ public class QueenAction extends DynamicAction {
 	public QueenAction(String type, XYLocation loc) {
 		super(type);
 		setAttribute(ATTRIBUTE_QUEEN_LOC, loc);
+	}
+	
+	/**
+	 * Creates a list of queen actions. Supported values of type are {@link #PLACE_QUEEN}
+	 * , {@link #REMOVE_QUEEN}, or {@link #MOVE_QUEEN}.
+	 */
+	public QueenAction(String type, List<XYLocation> listLoc) {
+		super(type);
+		//setAttribute(ATTRIBUTE_QUEEN_LOC, loc);
+		setAttribute(ALL_QUEENS_LOC, listLoc);
 	}
 
 	public XYLocation getLocation() {
@@ -36,5 +49,9 @@ public class QueenAction extends DynamicAction {
 
 	public int getY() {
 		return getLocation().getYCoOrdinate();
+	}
+	
+	public List<XYLocation> getMoreLocations() {
+		return (List<XYLocation>) getAttribute(ALL_QUEENS_LOC);
 	}
 }

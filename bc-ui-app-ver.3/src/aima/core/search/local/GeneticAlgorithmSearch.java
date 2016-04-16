@@ -75,20 +75,13 @@ public class GeneticAlgorithmSearch<A> implements Search {
 			
 			for (Individual<Integer> individual : listOfIndividuals) {
 				List<Integer> representationList = individual.getRepresentation();
-				System.out.println(representationList);
-				/*for (int i = 0; i < representationList.size(); i++) {
-					result.add(new QueenAction("moveQueenTo", new XYLocation(i, representationList.get(i))));
-				};*/
-			}
-			
-			Individual<Integer> bestIndividual = listOfIndividuals.get(listOfIndividuals.size()-1);
-			
-			List<Integer> representationList = bestIndividual.getRepresentation();
-			for (int i = 0; i < representationList.size(); i++) {
-				result.add(new QueenAction("placeQueenAt", new XYLocation(i, representationList.get(i))));
-			};
-			
-			
+				List<XYLocation> newActionsList = new ArrayList<XYLocation>();
+				for (int i = 0; i < representationList.size(); i++) {
+					newActionsList.add(new XYLocation(i, representationList.get(i)));
+				};
+				result.add(new QueenAction("moveQueenTo", newActionsList));
+			}			
+			Individual<Integer> bestIndividual = listOfIndividuals.get(listOfIndividuals.size()-1);		
 			// System.out.println("Board Size      = " + boardSize);
 			// System.out.println("# Board Layouts = " + (new BigDecimal(boardSize)).pow(boardSize));
 			metrics.set(METRIC_FITNESS, fitnessFunction.getValue(bestIndividual));	
@@ -96,12 +89,6 @@ public class GeneticAlgorithmSearch<A> implements Search {
 			metrics.set(METRIC_POPULATION_SIZE, ga.getPopulationSize());	
 			metrics.set(METRIC_ITERATIONS, ga.getIterations());	
 			metrics.set(METRIC_TOOK, Long.toString(ga.getTimeInMilliseconds()) + "ms.");
-			/*
-			System.out.println("Fitness        " + " : " + fitnessFunction.getValue(bestIndividual));
-			System.out.println("Is Goal        " + " : "	+ fitnessFunction.isGoalState(bestIndividual));
-			System.out.println("Population Size" + " : " + ga.getPopulationSize());
-			System.out.println("Itertions      " + " : " + ga.getIterations());
-			System.out.println("Took           " + " : " + ga.getTimeInMilliseconds() + "ms.");*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
