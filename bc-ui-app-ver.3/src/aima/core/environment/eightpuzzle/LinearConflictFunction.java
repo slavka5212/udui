@@ -18,9 +18,18 @@ public class LinearConflictFunction extends ManhattanHeuristicFunction implement
 	public double h(Object state) {
 		EightPuzzleBoard board = (EightPuzzleBoard) state;
 		int retVal = 0;
-		for (int i = 1; i < 9; i++) {	
-			XYLocation loc = board.getLocationOf(i);
-			retVal += evaluateLinearConflict(i, loc);
+		// rows
+		for (int i = 0; i < 3; i++) {	
+			int pom = 0;
+			// columns
+			for (int j = 0; j < 3; j++) {
+				int value = board.getValueAt(new XYLocation(j,i));
+				// the value should be in the row but in the different column 
+				if (i * 3 <= value && value < (i+1) * 3 && value != i * 3 + j) 
+				pom++; 
+			} 
+			// the are at least two tiles in a linear conflict
+			if (pom > 1) retVal += pom;
 		}
 		return super.h(state) + retVal;
 	}
