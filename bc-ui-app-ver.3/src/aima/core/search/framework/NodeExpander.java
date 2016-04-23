@@ -42,7 +42,7 @@ public class NodeExpander {
 		return metrics.getDouble(EFFECTIVE_BRANCHING_FACTOR);
 	}
 
-	public void setEffectiveBranchingFactor(double d) {
+	public void setEffectiveBranchingFactor(String d) {
 		metrics.set(EFFECTIVE_BRANCHING_FACTOR, d);
 	}
 	
@@ -85,7 +85,9 @@ public class NodeExpander {
 		metrics.set(METRIC_NODES_EXPANDED,
 				metrics.getInt(METRIC_NODES_EXPANDED) + 1);		
 		
-		setEffectiveBranchingFactor(Math.pow(getNodesExpanded(), ((double)1/(double)node.getPathFromRoot().size())));
+		setEffectiveBranchingFactor(String.format("%.3f%n", 
+				Math.pow(getNodesExpanded(), ((double)1/(double)node.getPathFromRoot().size()))
+		));
 		return childNodes;
 	}
 }
