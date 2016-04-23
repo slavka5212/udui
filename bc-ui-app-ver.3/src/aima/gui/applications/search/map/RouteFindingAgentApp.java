@@ -58,12 +58,8 @@ public class RouteFindingAgentApp extends SimpleAgentApp {
 		};
 
 		private MapType usedMap = null;
-		private static String[] ROMANIA_DESTS = new String[] {
-				Messages.getMessages().getString("to")+" Bucharest", Messages.getMessages().getString("to")+" Eforie", Messages.getMessages().getString("to")+" Neamt",
-				Messages.getMessages().getString("to")+" "+Messages.getMessages().getString("Random") };
-		private static String[] AUSTRALIA_DESTS = new String[] {
-				Messages.getMessages().getString("to")+" Port Hedland", Messages.getMessages().getString("to")+" Albany", Messages.getMessages().getString("to")+" Melbourne",
-				Messages.getMessages().getString("to")+" "+Messages.getMessages().getString("Random") };
+		private static String[] ROMANIA_DESTS;
+		private static String[] AUSTRALIA_DESTS;
 
 		/** Creates a new frame. */
 		public RouteFindingAgentFrame() {
@@ -73,6 +69,12 @@ public class RouteFindingAgentApp extends SimpleAgentApp {
 					"Romania, "+Messages.getMessages().getString("from")+" Fagaras",
 					"Australia, "+Messages.getMessages().getString("from")+" Sydney",
 					"Australia, "+Messages.getMessages().getString("from")+" "+Messages.getMessages().getString("Random") }, 0);
+			ROMANIA_DESTS = new String[] {
+					Messages.getMessages().getString("to")+" Bucharest", Messages.getMessages().getString("to")+" Eforie", Messages.getMessages().getString("to")+" Neamt",
+					Messages.getMessages().getString("to")+" "+Messages.getMessages().getString("Random") };
+			AUSTRALIA_DESTS = new String[] {
+					Messages.getMessages().getString("to")+" Port Hedland", Messages.getMessages().getString("to")+" Albany", Messages.getMessages().getString("to")+" Melbourne",
+					Messages.getMessages().getString("to")+" "+Messages.getMessages().getString("Random") };
 			setSelectorItems(SEARCH_MODE_SEL, SearchFactory.getInstance()
 					.getSearchModeNames(), 1); // change the default!
 			setSelectorItems(HEURISTIC_SEL, new String[] { "=0", "SLD" }, 1);
