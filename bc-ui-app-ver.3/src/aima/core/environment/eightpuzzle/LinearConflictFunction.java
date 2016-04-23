@@ -28,22 +28,10 @@ public class LinearConflictFunction extends ManhattanHeuristicFunction implement
 				if (i * 3 <= value && value < (i+1) * 3 && value != i * 3 + j) 
 				pom++; 
 			} 
-			// the are at least two tiles in a linear conflict
+			// there are at least two tiles in a linear conflict
 			if (pom > 1) retVal += pom;
 		}
 		return super.h(state) + retVal;
 	}
-	
-	/*
-	 * Two tiles tj and tk are in a linear conflict if tj and tk are in the same line, 
-	 * the goal positions of tj and tk are both in that line, tj is to the right of tk 
-	 * and goal position of tj is to the left of the goal position of tk.
-	 * 
-	 */
-	private int evaluateLinearConflict(int i, XYLocation loc) {
-		return 0;
-	}
-	
-
 	
 }

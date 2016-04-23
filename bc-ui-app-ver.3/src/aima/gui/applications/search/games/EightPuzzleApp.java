@@ -27,6 +27,7 @@ import aima.core.environment.eightpuzzle.EightPuzzleGoalTest;
 import aima.core.environment.eightpuzzle.LinearConflictFunction;
 import aima.core.environment.eightpuzzle.ManhattanHeuristicFunction;
 import aima.core.environment.eightpuzzle.MisplacedTilleHeuristicFunction;
+import aima.core.environment.eightpuzzle.NilssonsSequenceScoreFunction;
 import aima.core.search.framework.GraphSearch;
 import aima.core.search.framework.Problem;
 import aima.core.search.framework.Search;
@@ -67,6 +68,7 @@ public class EightPuzzleApp extends SimpleAgentApp {
 			new AStarSearch(new GraphSearch(), new MisplacedTilleHeuristicFunction()),
 			new AStarSearch(new GraphSearch(), new ManhattanHeuristicFunction()),
 			new AStarSearch(new GraphSearch(), new LinearConflictFunction()),
+			new AStarSearch(new GraphSearch(), new NilssonsSequenceScoreFunction()),
 			new SimulatedAnnealingSearch(new ManhattanHeuristicFunction())
 	));
 
@@ -80,6 +82,7 @@ public class EightPuzzleApp extends SimpleAgentApp {
 				Messages.getMessages().getString("alg_AStarSearch")+ " (" + Messages.getMessages().getString("alg_MisplacedTileHeuristic") + ")",
 				Messages.getMessages().getString("alg_AStarSearch")+ " (" + Messages.getMessages().getString("alg_ManhattanHeuristic") + ")",
 				Messages.getMessages().getString("alg_AStarSearch")+ " (" + Messages.getMessages().getString("alg_LinearConflict") + ")",
+				Messages.getMessages().getString("alg_AStarSearch")+ " (" + Messages.getMessages().getString("alg_NilssonsSequence") + ")",
 				Messages.getMessages().getString("alg_SimulatedAnnealingSearch")
 		));
 	}
