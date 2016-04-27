@@ -1,6 +1,6 @@
 # UDUI
 
-Aplikácia UDUI (názov odvodenı od názvu predmetu "Úvod do umelej inteligencie) bola vytvorená ako edukaèná pomôcka pri vıuèbe a na základe podnetu k bakalárskej práci.
+Aplikácia UDUI (odvodená od názvu predmetu "Úvod do umelej inteligencie") bola vytvorená ako edukaèná pomôcka pri vıuèbe a na základe podnetu k bakalárskej práci.
 
 > Softvér je zameranı na vizualizáciu vıukovıch simulácií. Konkrétne sa zaoberá problematikou preh¾adávacích algoritmov, A* algoritmus a algoritmov hier.   
 
@@ -15,9 +15,9 @@ Na spustenie aplikácie staèí rozbali súbor, ktorı obsahuje spustite¾nı .jar súb
 ### Štruktúra menu
 Menu sa skladá z troch hlavnıch èasti: Nastavenia, Preh¾adávania a Hry. Kadá z tıchto èastí obsahuje vysúvacie podmenu.
 
-- **Nastavenia** obsahujú zmenu jazyka aplikácie s prepínaèom ïalšom podmenu, kde je moné si zvoli: Slovenskı jazyk alebo Anglickı jazyk. Pri spustené aplikácie je predvolenı anglickı jazyk. 
-- **Preh¾adávania** obsahujú dve simulácie: Vyfarbovanie mapy a H¾adanie cesty.
-- **Hry** obsahujú dve simulácie hier: Osem puzzle a N dám.
+- **Nastavenia** obsahujú zmenu jazyka aplikácie s prepínaèom ïalšom podmenu, kde je moné si zvoli: *Slovenskı jazyk* alebo *Anglickı jazyk*. Pri spustené aplikácie je predvolenı anglickı jazyk. 
+- **Preh¾adávania** obsahujú dve simulácie: *Vyfarbovanie mapy* a *H¾adanie cesty*.
+- **Hry** obsahujú dve simulácie hier: *Osem puzzle* a *N dám*.
 
 ### Simulácie
 Kadá simulácia sa skladá zo štyroch hlavnıch èastí, ktoré sú rozdelené do rozdielnych rámèekov.
