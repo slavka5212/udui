@@ -89,9 +89,9 @@ public class RootLayoutController {
 		return new EventHandler<ActionEvent>() {
           public void handle(ActionEvent e) {
         	  Alert alert = new Alert(AlertType.INFORMATION);
-		        alert.setTitle("UDUI App");
-		        alert.setHeaderText(messages.getString("menu_about"));
-		        String about_info = messages.getString("about_author") + " " + messages.getString("MainApp_author") + "\n" + messages.getString("about_website") + " " + messages.getString("MainApp_website");
+		        alert.setTitle(messages.getString("menu_about"));
+		        alert.setHeaderText(messages.getString("menu_about")+" "+messages.getString("MainApp_title"));
+		        String about_info = messages.getString("about_website") + " " + messages.getString("MainApp_website");
 		        alert.setContentText(about_info);
 		        alert.showAndWait();
           }
