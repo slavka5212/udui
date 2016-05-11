@@ -80,7 +80,7 @@ public class NQueensApp extends SimpleAgentApp {
 
 	static void loadNewSearchNames() {
 		SEARCH_NAMES = new ArrayList<String>(Arrays.asList(
-				Messages.getMessages().getString("alg_DepthLimitedSearch")+ " (" + Messages.getMessages().getString("alg_GraphSearch") + ")",
+				Messages.getMessages().getString("alg_DepthFirstSearch")+ " (" + Messages.getMessages().getString("alg_GraphSearch") + ")",
 				Messages.getMessages().getString("alg_DepthLimitedSearch")+ " (8)",
 				Messages.getMessages().getString("alg_BreadthFirstSearch")+ " (" + Messages.getMessages().getString("alg_TreeSearch") + ")", 
 				Messages.getMessages().getString("alg_BreadthFirstSearch")+ " (" + Messages.getMessages().getString("alg_GraphSearch") + ")", 
