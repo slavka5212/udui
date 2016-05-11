@@ -11,35 +11,26 @@ import aima.core.search.framework.HeuristicFunction;
  */
 public class NMaxSwapHeuristicFunction implements HeuristicFunction {
 
-	@Override
 	public double h(Object state) {
 		EightPuzzleBoard board = (EightPuzzleBoard) state;
 		int[] tempBoard = board.getState();
 		int[] solution = new int[] {0,1,2,3,4,5,6,7,8};
-		//for (int a = 0; a < tempBoard.length; a++) System.out.print(tempBoard[a]);
-		//System.out.println();
 		int returnH = 0;
 		while (true)  {
 			for (int i = 8; i > -1; i--) {
 				if (tempBoard[i] == 0 && tempBoard[i] != solution[i]) {
 					// swap space with the right tile
 					swap(tempBoard, i, getPositionOf(tempBoard, solution[i]));
-					for (int a = 0; a < tempBoard.length; a++) System.out.print(tempBoard[a]);
-					System.out.println("SWAP 0");
 					returnH++;
 					break;
 				}
 				else if (tempBoard[i] != solution[i]) {
 					// swap any tile with the space
 					swap(tempBoard, i, getPositionOf(tempBoard, 0));
-					for (int a = 0; a < tempBoard.length; a++) System.out.print(tempBoard[a]);
-					System.out.println("SWAP ANY");
 					returnH++;
 					break;
 				}
 			} 
-			for (int a = 0; a < tempBoard.length; a++) System.out.print(tempBoard[a]);
-			System.out.println("CYKLUS");
 			int count = 0;
 			for(int k = 0; k <= 8; k++) {
 				if(tempBoard[k] == solution[k]) {
@@ -48,7 +39,6 @@ public class NMaxSwapHeuristicFunction implements HeuristicFunction {
 			}
 			if(count == 9) break;
 		}
-		System.out.println("H="+returnH);
 		return returnH;
 	}
 
@@ -62,9 +52,9 @@ public class NMaxSwapHeuristicFunction implements HeuristicFunction {
 		return retVal;
 	}
 	
-	private void swap(int[] state, int indexA, int indexB) {
-		int temp = state[indexA];
-		state[indexA] = state[indexB];
-		state[indexB] = temp;
+	private void swap(int[] array, int indexA, int indexB) {
+		int temp = array[indexA];
+		array[indexA] = array[indexB];
+		array[indexB] = temp;
 	}
 }
