@@ -21,8 +21,6 @@ public class NilssonsSequenceScoreFunction extends ManhattanHeuristicFunction im
 	@Override
 	public double h(Object state) {
 		EightPuzzleBoard board = (EightPuzzleBoard) state;
-		/* for (int a: board.getState()) System.out.print(a);
-		 System.out.println(); */
 		int[] a = new int[] {1,2,3,8,0,4,7,6,5};
 		EightPuzzleBoard goalSquare = new EightPuzzleBoard(a);
 		int score = 0;
@@ -32,8 +30,7 @@ public class NilssonsSequenceScoreFunction extends ManhattanHeuristicFunction im
 			int second = board.getValueAt(goalSquare.getLocationOf((i+1) % 8));
 			if ((first+1) != second) { 
 				score += 2;
-				 //System.out.println(first + " " + second);
-			}   //else System.out.println(first + " " + second + " OK");
+			}  
 		}
 		// center is not empty 
 		if (board.getValueAt(goalSquare.getLocationOf(0)) != 0) {

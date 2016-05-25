@@ -85,7 +85,7 @@ public class EightPuzzleApp extends SimpleAgentApp {
 				Messages.getMessages().getString("alg_AStarSearch")+ " (" + Messages.getMessages().getString("alg_ManhattanHeuristic") + ")",
 				Messages.getMessages().getString("alg_AStarSearch")+ " (" + Messages.getMessages().getString("alg_LinearConflict") + ")",
 				Messages.getMessages().getString("alg_AStarSearch")+ " (" + Messages.getMessages().getString("alg_NilssonsSequence") + ")",
-				//"N-MAX SWAP",
+				//Messages.getMessages().getString("alg_AStarSearch")+ " (" + Messages.getMessages().getString("alg_N-MaxSwap") + ")",
 				Messages.getMessages().getString("alg_SimulatedAnnealingSearch")
 		));
 	}

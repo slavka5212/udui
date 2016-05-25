@@ -84,14 +84,23 @@ public class NodeExpander {
 		}
 		metrics.set(METRIC_NODES_EXPANDED,
 				metrics.getInt(METRIC_NODES_EXPANDED) + 1);		
-		
-		
+			
 		setEffectiveBranchingFactor(String.format("%.3f%n", 
-				//Math.pow(getNodesExpanded(), ((double)1/(double)node.getPathFromRoot().size()))
+				//closeEffectiveBranchingFactor(getNodesExpanded(), node.getPathFromRoot().size());
 				effectiveBranchingFactor(getNodesExpanded(), node.getPathFromRoot().size())		
 		));
-		//System.out.println("Hlbka = "+node.getPathFromRoot().size());
 		return childNodes;
+	}
+	
+	/**
+	 * Calculates the effective branching factor by a Close Guess.
+	 * 
+	 * @param nNodes 	number of nodes
+	 * @param depth 	depth where solution was found
+	 * @return 	the estimated effective branching factor
+	 */
+	public static double closeEffectiveBranchingFactor(int nNodes, int depth) {
+		return Math.pow(nNodes, ((double)1/(double)depth));
 	}
 	
 	/**
